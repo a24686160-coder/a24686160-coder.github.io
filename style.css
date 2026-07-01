@@ -1,0 +1,19 @@
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#05050f;color:#d0d0e0;font-family:'Segoe UI',sans-serif;display:flex;justify-content:center;align-items:center;min-height:100vh;padding:16px}
+.card{background:rgba(18,18,31,0.85);backdrop-filter:blur(18px);padding:35px;border-radius:32px;width:780px;max-width:100%;border:1px solid rgba(59,158,255,0.25);box-shadow:0 30px 80px rgba(59,158,255,0.15)}
+h1{font-size:30px;font-weight:800;display:flex;align-items:center;gap:12px;margin-bottom:4px;background:linear-gradient(135deg,#3b9eff,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.sub{color:#7a7a9a;font-size:13px;margin-bottom:24px;border-left:2px solid #3b9eff;padding-left:14px}
+.tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.tabs button{padding:10px 18px;border-radius:14px;border:1px solid #28284a;background:#0e0e20;color:#888;font-weight:600;cursor:pointer;transition:.3s;font-size:13px;flex:1}
+.tabs button.active{background:#3b9eff;color:#fff;border-color:#3b9eff;box-shadow:0 0 30px rgba(59,158,255,0.25)}
+.row{display:flex;gap:12px;margin-bottom:20px}
+.row input{flex:1;padding:16px 20px;border-radius:16px;border:1px solid #28284a;background:#0a0a18;color:#fff;font-size:16px;outline:none;transition:.3s}
+.row input:focus{border-color:#3b9eff;box-shadow:0 0 30px rgba(59,158,255,0.1)}
+.row button{padding:16px 36px;border-radius:16px;background:linear-gradient(135deg,#3b9eff,#7a5cff);border:none;color:#fff;font-weight:700;font-size:16px;cursor:pointer;transition:.3s;box-shadow:0 4px 30px rgba(59,158,255,0.3)}
+.row button:hover{transform:scale(1.02);box-shadow:0 8px 40px rgba(59,158,255,0.5)}
+#output{background:#0a0a18;border-radius:18px;padding:22px;min-height:200px;border:1px solid #1a1a34;font-size:14px;line-height:1.9;overflow-x:auto;color:#c8c8e0;white-space:pre-wrap}
+.status{color:#555;text-align:center;padding:35px 0}
+.err{color:#f07070}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:#0a0a18}
+::-webkit-scrollbar-thumb{background:#3b9eff;border-radius:10px}
