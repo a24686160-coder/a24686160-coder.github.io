@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSINT Tool</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{background:#0b0b15;color:#d0d0e0;font-family:'Segoe UI',system-ui,sans-serif;display:flex;justify-content:center;align-items:center;min-height:100vh}
+        .box{background:#141424;padding:35px;border-radius:28px;width:650px;max-width:96%;box-shadow:0 20px 60px rgba(0,0,0,.8);border:1px solid #2a2a44}
+        h1{font-size:26px;font-weight:700;margin-bottom:25px}
+        h1 span{color:#3b9eff}
+        .tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+        .tabs button{flex:1;padding:12px;border-radius:14px;border:1px solid #2a2a44;background:#0f0f1f;color:#888;font-weight:600;cursor:pointer;transition:.2s;font-size:14px}
+        .tabs button.active{background:#3b9eff;color:#fff;border-color:#3b9eff}
+        .row{display:flex;gap:10px;margin-bottom:20px}
+        .row input{flex:1;padding:14px 18px;border-radius:14px;border:1px solid #2a2a44;background:#0b0b18;color:#fff;font-size:15px;outline:none}
+        .row input:focus{border-color:#3b9eff}
+        .row button{padding:14px 28px;border-radius:14px;background:#3b9eff;border:none;color:#fff;font-weight:700;font-size:15px;cursor:pointer;transition:.2s}
+        .row button:hover{background:#2a7fdd}
+        #out{background:#0b0b18;border-radius:16px;padding:20px;min-height:220px;border:1px solid #1f1f34;font-size:14px;line-height:1.7;white-space:pre-wrap;color:#c0c0d0;overflow-x:auto}
+        .status{color:#666;text-align:center;padding:30px 0}
+        .hit{color:#7ae0a0}
+        .info{color:#f0c070}
+        .err{color:#f07070}
+        .small{color:#666;font-size:12px}
+        .footer{text-align:center;margin-top:18px;font-size:12px;color:#444}
+    </style>
+</head>
+<body>
+<div class="box">
+    <h1>🔍 <span>OSINT</span> Scanner</h1>
+
+    <div class="tabs" id="tabs">
+        <button class="active" data-mode="phone">📱 Номер</button>
+        <button data-mode="nick">👤 Ник</button>
+        <button data-mode="name">📛 ФИО</button>
+    </div>
+
+    <div class="row">
+        <input id="q" placeholder="Введите данные...">
+        <button id="go">Найти</button>
+    </div>
+
+    <div id="out"><div class="status">Введите данные и нажмите «Найти»</div></div>
+    <div class="footer">Публичные API — достоверность не гарантирована</div>
+</div>
+
+<script>
+// ====== ОСНОВНАЯ ЛОГИКА ======
+const q = document.getElementById('q');
+const go = document.getElementById('go');
+const out = document.getElementById('out');
+const tabs = document.querySelectorAll('.tabs button');
+
+let mode = 'phone';
+
+tabs.forEach(b => {
+    b.addEventListener('click', function() {
+        tabs.forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+        mode = this.dataset.mode;
+        q.placeholder = mode==='phone'?'Номер (+7...)' : mode==='nick'?'Никнейм' : 'ФИО';
+        out.innerHTML = '<div class="status">Готов к поиску</div>';
+    });
+});
+
+go.addEventListener('click', run);
+q.addEventListener('keydown', e => { if(e.key==='Enter') run(); });
+
+function run() {
+    const query = q.value.trim();
+    if(!query) { out.innerHTML = '<div class="status">⚠️ Введите данные</div>'; return; }
+
+    out.innerHTML = '<div class="status">⏳ Сканирование...</div>';
+
+    if(mode === 'phone') searchPhone(query);
+    else if(mode === 'nick') searchNick(query);
+    else searchName(query);
+}
+
+// ====== ПО НОМЕРУ (реальный API) ======
+function searchPhone(phone) {
+    fetch(`https://api.veriphone.com/v1/verify?phone=${phone}&key=FNRX4C9QNKKMPNKK`)
+        .then(r => r.json())
+        .then(data => {
+            let html = `📱 <b>Номер:</b> ${phone}\n`;
+            if(data.status === 'success' && data.valid) {
+                html += `🌍 <b>Страна:</b> ${data.country_name} (${data.country_code})\n`;
+                html += `📞 <b>Оператор:</b> ${data.carrier || 'неизвестно'}\n`;
+                html += `📍 <b>Регион:</b> ${data.location || 'неизвестно'}\n`;
+                html += `📌 <b>Тип:</b> ${data.line_type || 'неизвестно'}\n`;
+            } else {
+                html += `❌ <span class="err">Номер не найден или невалидный</span>\n`;
+            }
+            html += `\n🔎 <span class="small">Проверь также в Telegram, WhatsApp, Truecaller</span>`;
+            out.innerHTML = html;
+        })
+        .catch(() => {
+            out.innerHTML = `❌ <span class="err">Ошибка API. Проверь номер.</span>\n\n🔍 <span class="small">Используй Truecaller, LeakCheck, боты @Sherlock_TG_bot</span>`;
+        });
+}
+
+// ====== ПО НИКУ ======
+function searchNick(nick) {
+    // Пытаемся через публичный WhatMyName (неофициальный)
+    fetch(`https://whatsmyname.app/api/v1/username/${nick}`)
+        .then(r => r.json())
+        .then(data => {
+            let html = `👤 <b>Ник:</b> ${nick}\n\n`;
+            let found = false;
+            if(data && data.sites) {
+                for(let site of data.sites) {
+                    if(site.status === 'claimed') {
+                        html += `✅ <a href="${site.url}" target="_blank">${site.name}</a>\n`;
+                        found = true;
+                    }
+                }
+            }
+            if(!found) {
+                html += `❌ <span class="err">Не найдено ни одного профиля с таким ником.</span>\n`;
+            }
+            html += `\n🔎 <span class="small">Проверь вручную: Instagram, VK, GitHub, TikTok, Twitter</span>`;
+            out.innerHTML = html;
+        })
+        .catch(() => {
+            // fallback — просто даём ссылки, но уже рабочие
+            let html = `👤 <b>Ник:</b> ${nick}\n\n`;
+            const sites = [
+                ['Instagram', `https://instagram.com/${nick}`],
+                ['VK', `https://vk.com/${nick}`],
+                ['GitHub', `https://github.com/${nick}`],
+                ['TikTok', `https://tiktok.com/@${nick}`],
+                ['Twitter', `https://twitter.com/${nick}`],
+                ['YouTube', `https://youtube.com/@${nick}`]
+            ];
+            html += `🔍 Попробуй открыть профили:\n`;
+            for(let [name, url] of sites) {
+                html += `→ <a href="${url}" target="_blank">${name}</a>\n`;
+            }
+            html += `\n💡 <span class="small">Используй @Sherlock_TG_bot для глубокого поиска</span>`;
+            out.innerHTML = html;
+        });
+}
+
+// ====== ПО ФИО ======
+function searchName(name) {
+    // Имитация поиска — реального API нет
+    let html = `📛 <b>ФИО:</b> ${name}\n\n`;
+    html += `🔍 Поиск в открытых источниках:\n`;
+    html += `→ <a href="https://www.google.com/search?q=${encodeURIComponent(name)}" target="_blank">Google</a>\n`;
+    html += `→ <a href="https://yandex.ru/search/?text=${encodeURIComponent(name)}" target="_blank">Яндекс</a>\n`;
+    html += `→ <a href="https://vk.com/search?c[0]=people&c[q]=${encodeURIComponent(name)}" target="_blank">VK</a>\n`;
+    html += `→ <a href="https://www.facebook.com/search/top/?q=${encodeURIComponent(name)}" target="_blank">Facebook</a>\n\n`;
+    html += `📌 <span class="small">Попробуй также поиск по номеру, если он есть</span>`;
+    out.innerHTML = html;
+}
+</script>
+</body>
+</html>
