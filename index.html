@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSINT Reconnaissance Engine</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="theme-toggle" id="themeToggle">
+        <span class="toggle-icon">🌙</span>
+    </div>
+
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <h1 class="title">🔍 OSINT Engine</h1>
+                <p class="subtitle">Open-Source Intelligence Reconnaissance</p>
+            </div>
+        </header>
+
+        <div class="search-panel">
+            <div class="input-group">
+                <label class="label">Select Intelligence Type</label>
+                <div class="type-selector">
+                    <button class="type-btn active" data-type="phone" title="Phone number search">
+                        <span class="icon">📱</span>
+                        <span class="text">Phone</span>
+                    </button>
+                    <button class="type-btn" data-type="username" title="Username / handle search">
+                        <span class="icon">👤</span>
+                        <span class="text">Username</span>
+                    </button>
+                    <button class="type-btn" data-type="name" title="Full name search">
+                        <span class="icon">👥</span>
+                        <span class="text">Full Name</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label class="label" for="searchInput">Enter Target Information</label>
+                <div class="input-wrapper">
+                    <input 
+                        type="text" 
+                        id="searchInput" 
+                        class="search-input" 
+                        placeholder="Enter phone, username, or name..."
+                        autocomplete="off"
+                    >
+                    <span class="input-hint" id="inputHint">Format: +1234567890 or 1234567890</span>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label class="label">Search Scope</label>
+                <div class="checkbox-group">
+                    <label class="checkbox">
+                        <input type="checkbox" name="scope" value="social" checked>
+                        <span class="checkmark"></span>
+                        <span class="label-text">Social Networks</span>
+                    </label>
+                    <label class="checkbox">
+                        <input type="checkbox" name="scope" value="breaches" checked>
+                        <span class="checkmark"></span>
+                        <span class="label-text">Data Breaches</span>
+                    </label>
+                    <label class="checkbox">
+                        <input type="checkbox" name="scope" value="domains" checked>
+                        <span class="checkmark"></span>
+                        <span class="label-text">Domains/Web</span>
+                    </label>
+                    <label class="checkbox">
+                        <input type="checkbox" name="scope" value="public" checked>
+                        <span class="checkmark"></span>
+                        <span class="label-text">Public Records</span>
+                    </label>
+                </div>
+            </div>
+
+            <button class="btn-primary" id="searchBtn">
+                <span class="btn-text">Start Reconnaissance</span>
+                <span class="btn-spinner" id="btnSpinner"></span>
+            </button>
+        </div>
+
+        <div class="results-panel" id="resultsPanel" style="display: none;">
+            <div class="results-header">
+                <h2>Intelligence Report</h2>
+                <button class="btn-export" id="exportBtn">📥 Export JSON</button>
+                <button class="btn-clear" id="clearBtn">Clear</button>
+            </div>
+
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="summary">Summary</button>
+                <button class="tab-btn" data-tab="social">Social Media</button>
+                <button class="tab-btn" data-tab="breaches">Breaches</button>
+                <button class="tab-btn" data-tab="domains">Domains</button>
+                <button class="tab-btn" data-tab="public">Public Info</button>
+                <button class="tab-btn" data-tab="raw">Raw Data</button>
+            </div>
+
+            <div class="tab-content">
+                <div id="tab-summary" class="tab active">
+                    <div class="summary-grid" id="summaryGrid"></div>
+                </div>
+                <div id="tab-social" class="tab">
+                    <div class="results-list" id="socialResults"></div>
+                </div>
+                <div id="tab-breaches" class="tab">
+                    <div class="results-list" id="breachesResults"></div>
+                </div>
+                <div id="tab-domains" class="tab">
+                    <div class="results-list" id="domainsResults"></div>
+                </div>
+                <div id="tab-public" class="tab">
+                    <div class="results-list" id="publicResults"></div>
+                </div>
+                <div id="tab-raw" class="tab">
+                    <pre id="rawData"></pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="status-panel" id="statusPanel" style="display: none;">
+            <div class="status-content">
+                <div class="spinner"></div>
+                <p id="statusText">Searching public databases...</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="error-panel" id="errorPanel" style="display: none;">
+            <div class="error-content">
+                <span class="error-icon">⚠️</span>
+                <p id="errorText"></p>
+                <button class="btn-small" onclick="document.getElementById('errorPanel').style.display = 'none'">Dismiss</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
