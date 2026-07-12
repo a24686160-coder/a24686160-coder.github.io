@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ИИ-инженерия · Модули</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="bg-grid"></div>
+
+<div class="wrap">
+  <div class="titleblock">
+    <div class="tb-row">
+      <span>Схема обучения · Rev. 01</span>
+      <span class="blink">5 модулей активны</span>
+    </div>
+    <h1>ИИ-инженерия</h1>
+    <p class="subtitle">Пять рабочих модулей — от промпта до оценки модели. <strong>Выберите модуль</strong>, чтобы открыть его содержимое.</p>
+    <div class="scanline"></div>
+  </div>
+
+  <div class="rack-label">Модульная стойка</div>
+
+  <div class="rack">
+
+    <button class="module" data-target="prompt">
+      <div class="module-top">
+        <span class="module-tag">MOD · PROMPT</span>
+        <h3 class="module-title">Промпт-инжиниринг</h3>
+        <p class="module-desc">Как формулировать задачи для модели, чтобы получать предсказуемый результат.</p>
+      </div>
+      <div class="connector"><div class="pins"><span></span><span></span><span></span></div><span class="go">открыть →</span></div>
+    </button>
+
+    <button class="module" data-target="rag">
+      <div class="module-top">
+        <span class="module-tag">MOD · RAG</span>
+        <h3 class="module-title">RAG</h3>
+        <p class="module-desc">Подключение внешних знаний к модели через поиск и подмешивание контекста.</p>
+      </div>
+      <div class="connector"><div class="pins"><span></span><span></span><span></span></div><span class="go">открыть →</span></div>
+    </button>
+
+    <button class="module" data-target="agents">
+      <div class="module-top">
+        <span class="module-tag">MOD · AGENT</span>
+        <h3 class="module-title">ИИ-агенты</h3>
+        <p class="module-desc">Модель, которая сама планирует шаги и пользуется инструментами.</p>
+      </div>
+      <div class="connector"><div class="pins"><span></span><span></span><span></span></div><span class="go">открыть →</span></div>
+    </button>
+
+    <button class="module" data-target="tuning">
+      <div class="module-top">
+        <span class="module-tag">MOD · TUNE</span>
+        <h3 class="module-title">Файн-тюнинг</h3>
+        <p class="module-desc">Дообучение модели на своих данных, когда промпта уже недостаточно.</p>
+      </div>
+      <div class="connector"><div class="pins"><span></span><span></span><span></span></div><span class="go">открыть →</span></div>
+    </button>
+
+    <button class="module" data-target="eval">
+      <div class="module-top">
+        <span class="module-tag">MOD · EVAL</span>
+        <h3 class="module-title">Оценка моделей</h3>
+        <p class="module-desc">Как проверять, что модель действительно работает лучше, а не просто иначе.</p>
+      </div>
+      <div class="connector"><div class="pins"><span></span><span></span><span></span></div><span class="go">открыть →</span></div>
+    </button>
+
+  </div>
+
+  <footer>END OF RACK · 5 / 5 MODULES</footer>
+</div>
+
+<!-- ============ DETAIL PANELS ============ -->
+
+<div class="detail" id="detail-prompt">
+  <div class="bg-grid"></div>
+  <div class="detail-inner">
+    <div class="detail-bar">
+      <span>MOD · PROMPT</span>
+      <button class="back-btn" data-close>← назад к стойке</button>
+    </div>
+    <span class="kicker">Модуль 1</span>
+    <h2>Промпт-инжиниринг</h2>
+    <p class="lede">Искусство формулировать задачу так, чтобы модель поняла её так же, как понимаете вы. Это самый дешёвый и быстрый способ управлять поведением модели — начинать стоит всегда с него.</p>
+
+    <div class="block">
+      <h3>Из чего состоит хороший промпт</h3>
+      <ul>
+        <li><strong>Роль.</strong> Кем модель должна себя вести — задаёт тон и рамки экспертизы ответа.</li>
+        <li><strong>Контекст.</strong> Всё, что модель обязана знать, но не может угадать сама: данные, ограничения, аудитория.</li>
+        <li><strong>Задача.</strong> Чёткая формулировка действия — глагол в начале, без двусмысленности.</li>
+        <li><strong>Формат ответа.</strong> Явно опишите структуру вывода: список, таблица, JSON, длина.</li>
+        <li><strong>Примеры (few-shot).</strong> Один-два образца желаемого ответа работают сильнее длинных описаний.</li>
+      </ul>
+    </div>
+
+    <div class="block">
+      <h3>Рабочие техники</h3>
+      <ul>
+        <li><strong>Chain-of-thought.</strong> Просьба рассуждать пошагово перед ответом заметно повышает точность на сложных задачах.</li>
+        <li><strong>Разбиение на шаги.</strong> Сложную задачу выгоднее решать серией простых промптов, чем одним огромным.</li>
+        <li><strong>Негативные примеры.</strong> Показать, как отвечать <em>не</em> нужно, часто эффективнее, чем только позитивные образцы.</li>
+        <li><strong>Итерация.</strong> Промпт — это черновик. Смотрите на реальные ответы и правьте формулировки, а не гадайте заранее.</li>
+      </ul>
+    </div>
+
+    <div class="tip">
+      <strong>Практика</strong>
+      Держите библиотеку промптов, которые сработали, версионируйте изменения и фиксируйте, на каких примерах промпт ломается — так вы быстрее найдёте границы его надёжности.
+    </div>
+  </div>
+</div>
+
+<div class="detail" id="detail-rag">
+  <div class="bg-grid"></div>
+  <div class="detail-inner">
+    <div class="detail-bar">
+      <span>MOD · RAG</span>
+      <button class="back-btn" data-close>← назад к стойке</button>
+    </div>
+    <span class="kicker">Модуль 2</span>
+    <h2>RAG (Retrieval-Augmented Generation)</h2>
+    <p class="lede">Модель не хранит все ваши данные в весах. RAG решает это: перед ответом система находит релевантные фрагменты знаний и подставляет их в промпт как контекст.</p>
+
+    <div class="block">
+      <h3>Как устроен пайплайн</h3>
+      <ul>
+        <li><strong>Чанкинг.</strong> Документы режутся на фрагменты — обычно по смысловым блокам, а не по фиксированному числу символов.</li>
+        <li><strong>Эмбеддинги.</strong> Каждый фрагмент превращается в вектор, отражающий его смысл.</li>
+        <li><strong>Векторная база.</strong> Векторы хранятся так, чтобы можно было быстро искать похожие по смыслу фрагменты.</li>
+        <li><strong>Поиск (retrieval).</strong> По запросу пользователя находятся наиболее релевантные фрагменты.</li>
+        <li><strong>Генерация.</strong> Найденные фрагменты подставляются в промпт, и модель отвечает, опираясь на них.</li>
+      </ul>
+    </div>
+
+    <div class="block">
+      <h3>Когда RAG нужен</h3>
+      <p>Когда ответы должны опираться на конкретные, часто меняющиеся или приватные данные — базу знаний компании, документацию, законодательство — а не на общие знания модели.</p>
+    </div>
+
+    <div class="warn-box">
+      <strong>Частые ошибки</strong>
+      Слишком крупные чанки размывают релевантность поиска, слишком мелкие — теряют контекст. Плохое разбиение документов на входе почти всегда важнее выбора модели эмбеддингов.
+    </div>
+  </div>
+</div>
+
+<div class="detail" id="detail-agents">
+  <div class="bg-grid"></div>
+  <div class="detail-inner">
+    <div class="detail-bar">
+      <span>MOD · AGENT</span>
+      <button class="back-btn" data-close>← назад к стойке</button>
+    </div>
+    <span class="kicker">Модуль 3</span>
+    <h2>ИИ-агенты</h2>
+    <p class="lede">Агент — это модель, которую поместили в цикл: она не просто отвечает один раз, а сама решает, какой следующий шаг сделать, пока не выполнит задачу.</p>
+
+    <div class="block">
+      <h3>Цикл работы агента</h3>
+      <ul>
+        <li><strong>Думать.</strong> Модель оценивает текущее состояние задачи и выбирает следующее действие.</li>
+        <li><strong>Действовать.</strong> Вызывается инструмент — поиск, код, API, файловая система.</li>
+        <li><strong>Наблюдать.</strong> Результат действия возвращается модели как новый контекст.</li>
+        <li>Цикл повторяется, пока задача не будет решена или не сработает ограничение по шагам.</li>
+      </ul>
+    </div>
+
+    <div class="block">
+      <h3>Ключевые компоненты</h3>
+      <ul>
+        <li><strong>Инструменты (tools).</strong> Чётко описанные функции, которые агент может вызывать — от них зависит, что агент вообще способен сделать.</li>
+        <li><strong>Память.</strong> Что агент помнит между шагами и между запусками — кратковременный контекст и долговременное хранилище.</li>
+        <li><strong>Планирование.</strong> Разбиение большой цели на подзадачи до или во время выполнения.</li>
+      </ul>
+    </div>
+
+    <div class="warn-box">
+      <strong>Риски</strong>
+      Агенты могут зацикливаться, дорого расходовать токены и вызывать инструменты с неверными аргументами. Лимиты на число шагов и логирование действий — не опция, а необходимость.
+    </div>
+  </div>
+</div>
+
+<div class="detail" id="detail-tuning">
+  <div class="bg-grid"></div>
+  <div class="detail-inner">
+    <div class="detail-bar">
+      <span>MOD · TUNE</span>
+      <button class="back-btn" data-close>← назад к стойке</button>
+    </div>
+    <span class="kicker">Модуль 4</span>
+    <h2>Файн-тюнинг</h2>
+    <p class="lede">Дообучение меняет саму модель, а не то, что ей показывают в промпте. Это самый дорогой и медленный инструмент — к нему стоит обращаться, только когда исчерпаны более дешёвые варианты.</p>
+
+    <div class="block">
+      <h3>Порядок выбора инструмента</h3>
+      <ul>
+        <li>Сначала — <strong>промпт-инжиниринг.</strong> Дёшево и быстро проверяется.</li>
+        <li>Затем — <strong>RAG</strong>, если проблема в отсутствии актуальных знаний.</li>
+        <li>И только потом — <strong>файн-тюнинг</strong>, если нужно изменить сам стиль, формат или поведение модели, а не то, что она знает.</li>
+      </ul>
+    </div>
+
+    <div class="block">
+      <h3>Основные виды</h3>
+      <ul>
+        <li><strong>Полный файн-тюнинг.</strong> Обновляются все веса модели — требует много данных и вычислительных ресурсов.</li>
+        <li><strong>LoRA / PEFT.</strong> Обучается небольшой набор дополнительных параметров, а основные веса заморожены — намного дешевле и практичнее для большинства задач.</li>
+        <li><strong>Инструктивная дообучение / RLHF.</strong> Модель настраивается на следование инструкциям и предпочтениям людей.</li>
+      </ul>
+    </div>
+
+    <div class="warn-box">
+      <strong>Риски</strong>
+      Переобучение на маленьком датасете и «катастрофическое забывание» — когда модель теряет общие навыки, приобретая узкие. Качество и разнообразие обучающих данных важнее их количества.
+    </div>
+  </div>
+</div>
+
+<div class="detail" id="detail-eval">
+  <div class="bg-grid"></div>
+  <div class="detail-inner">
+    <div class="detail-bar">
+      <span>MOD · EVAL</span>
+      <button class="back-btn" data-close>← назад к стойке</button>
+    </div>
+    <span class="kicker">Модуль 5</span>
+    <h2>Оценка моделей</h2>
+    <p class="lede">Без измерения нельзя понять, стал ли промпт, RAG-пайплайн или дообученная модель лучше. Оценка — это то, что превращает интуицию в проверяемый результат.</p>
+
+    <div class="block">
+      <h3>Виды оценки</h3>
+      <ul>
+        <li><strong>Автоматические метрики.</strong> Точность, совпадение с эталоном, метрики по формату ответа — быстро считаются, но плохо ловят смысловые ошибки.</li>
+        <li><strong>Оценка человеком.</strong> Более точная, но медленная и дорогая — обычно применяется на выборке, а не на всём объёме.</li>
+        <li><strong>LLM-as-judge.</strong> Одна модель оценивает ответы другой по заданным критериям — компромисс между скоростью и качеством оценки.</li>
+      </ul>
+    </div>
+
+    <div class="block">
+      <h3>Что нужно для честной оценки</h3>
+      <ul>
+        <li><strong>Тестовый набор</strong>, отражающий реальные запросы пользователей, а не только простые случаи.</li>
+        <li><strong>Фиксированные критерии</strong> до того, как смотреть на ответы, — иначе легко подогнать оценку под результат.</li>
+        <li><strong>Регулярный прогон</strong> при каждом изменении промпта, пайплайна или модели, а не разово.</li>
+      </ul>
+    </div>
+
+    <div class="tip">
+      <strong>Практика</strong>
+      Следите, чтобы тестовые данные не «утекали» в промпт, RAG-базу или обучающую выборку — иначе оценка покажет не реальное качество, а то, насколько модель запомнила тест.
+    </div>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('.module').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const panel = document.getElementById('detail-' + btn.dataset.target);
+      if(panel){
+        panel.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        panel.querySelector('.detail-inner').scrollTop = 0;
+      }
+    });
+  });
+
+  document.querySelectorAll('[data-close]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      btn.closest('.detail').classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape'){
+      document.querySelectorAll('.detail.open').forEach(p => p.classList.remove('open'));
+      document.body.style.overflow = '';
+    }
+  });
+</script>
+
+</body>
+</html>
