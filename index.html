@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ИИ-инженерия · Обучение</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- реальное закатное небо + анимированное солнце, которое опускается при скролле -->
+<div class="space-bg" aria-hidden="true">
+  <div class="night-photo"></div>
+  <div class="nebula-glow"></div>
+  <div class="sun-corona"></div>
+  <div class="sun"></div>
+</div>
+<div class="overlay overlay-night" aria-hidden="true"></div>
+
+<!-- вспышка при переходе к уроку -->
+<div class="warp-flash" aria-hidden="true"></div>
+
+<div class="scroller">
+
+  <section class="scene scene-intro">
+    <p class="eyebrow">Учебный курс</p>
+    <h1>ИИ&#8209;инженерия<br>среди звёзд</h1>
+    <p class="hero-lede">Шесть планет, шесть тем. Спускайтесь вниз сквозь космос — каждая появится по очереди. Нажмите на планету, чтобы улететь к ней и открыть урок.</p>
+    <div class="scroll-hint"><span class="dot"></span>прокрутите вниз</div>
+  </section>
+
+  <section class="scene planet-scene" data-side="left" data-target="prompt">
+    <div class="planet-wrap">
+      <span class="scene-index">01</span>
+      <button class="planet planet-mercury" data-target="prompt" aria-label="Открыть урок: Промпт-инжиниринг">
+        <span class="ring-back"></span>
+        <span class="planet-body"><span>Промпты</span></span>
+      </button>
+      <p class="scene-caption">Промпт-инжиниринг</p>
+    </div>
+  </section>
+
+  <section class="scene planet-scene" data-side="right" data-target="rag">
+    <div class="planet-wrap">
+      <span class="scene-index">02</span>
+      <button class="planet planet-venus" data-target="rag" aria-label="Открыть урок: RAG">
+        <span class="ring-back"></span>
+        <span class="planet-body"><span>RAG</span></span>
+      </button>
+      <p class="scene-caption">Retrieval-Augmented Generation</p>
+    </div>
+  </section>
+
+  <section class="scene planet-scene" data-side="left" data-target="agents">
+    <div class="planet-wrap">
+      <span class="scene-index">03</span>
+      <button class="planet planet-mars" data-target="agents" aria-label="Открыть урок: ИИ-агенты">
+        <span class="ring-back"></span>
+        <span class="planet-body"><span>Агенты</span></span>
+      </button>
+      <p class="scene-caption">ИИ-агенты</p>
+    </div>
+  </section>
+
+  <section class="scene planet-scene" data-side="right" data-target="tuning">
+    <div class="planet-wrap">
+      <span class="scene-index">04</span>
+      <button class="planet planet-jupiter" data-target="tuning" aria-label="Открыть урок: Файн-тюнинг">
+        <span class="ring-back"></span>
+        <span class="planet-body"><span>Тюнинг</span></span>
+      </button>
+      <p class="scene-caption">Файн-тюнинг</p>
+    </div>
+  </section>
+
+  <section class="scene planet-scene" data-side="left" data-target="eval">
+    <div class="planet-wrap">
+      <span class="scene-index">05</span>
+      <button class="planet planet-saturn" data-target="eval" aria-label="Открыть урок: Оценка моделей">
+        <span class="ring-back"></span>
+        <span class="planet-body"><span>Оценка</span></span>
+        <span class="ring-front"></span>
+      </button>
+      <p class="scene-caption">Оценка моделей</p>
+    </div>
+  </section>
+
+  <section class="scene planet-scene" data-side="right" data-target="advice">
+    <div class="planet-wrap">
+      <span class="scene-index">06</span>
+      <button class="planet planet-neptune" data-target="advice" aria-label="Открыть урок: Какой ИИ выбрать">
+        <span class="ring-back"></span>
+        <span class="planet-body"><span>Какой ИИ?</span></span>
+      </button>
+      <p class="scene-caption">Какой ИИ для чего выбрать</p>
+    </div>
+  </section>
+
+</div>
+
+<main>
+
+  <section id="prompt" class="lesson">
+    <div class="lesson-card">
+      <span class="kicker">01 · Промпт-инжиниринг</span>
+      <h2>Промпт-инжиниринг</h2>
+      <p class="lede">Промпт — это интерфейс между вашей задачей и моделью. Хороший промпт не про «магические слова», а про то, чтобы убрать неоднозначность: чем меньше модели остаётся додумывать, тем предсказуемее результат.</p>
+
+      <div class="block">
+        <h3>Из чего состоит рабочий промпт</h3>
+        <ul>
+          <li><strong>Роль.</strong> Кем модель должна быть в этой задаче — юристом, редактором, ревьюером кода. Роль задаёт словарь и глубину ответа.</li>
+          <li><strong>Контекст.</strong> Всё, что модель обязана знать, но не может угадать: аудитория, ограничения, уже принятые решения.</li>
+          <li><strong>Задача.</strong> Один чёткий глагол действия в начале — «сравни», «перепиши», «оцени», а не расплывчатое «помоги с».</li>
+          <li><strong>Формат вывода.</strong> Явно опишите структуру: таблица, нумерованный список, JSON-схема, ограничение по длине.</li>
+          <li><strong>Примеры (few-shot).</strong> Один-два образца желаемого ответа часто работают сильнее, чем абзац объяснений.</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <h3>Техники, которые реально работают</h3>
+        <ul>
+          <li><strong>Рассуждение по шагам.</strong> Просьба сначала рассуждать, а потом отвечать заметно повышает точность на многошаговых задачах, но раздувает длину ответа.</li>
+          <li><strong>Декомпозиция.</strong> Сложную задачу выгоднее решать серией простых промптов с проверкой между шагами.</li>
+          <li><strong>Негативные примеры.</strong> Показать, как отвечать не нужно, иногда убирает целый класс ошибок быстрее позитивных образцов.</li>
+          <li><strong>Самопроверка.</strong> Просьба перепроверить свой же ответ по чек-листу снижает число очевидных ошибок.</li>
+        </ul>
+      </div>
+
+      <div class="tip">
+        <strong>Упражнение</strong>
+        Возьмите промпт, которым пользуетесь регулярно, и распишите его по пяти пунктам выше. Обычно сразу находится один-два пропущенных элемента, из-за которых ответы «плавают».
+      </div>
+
+      <button class="back-up" data-scene="1">← назад к планетам</button>
+    </div>
+  </section>
+
+  <section id="rag" class="lesson">
+    <div class="lesson-card">
+      <span class="kicker">02 · RAG</span>
+      <h2>RAG</h2>
+      <p class="lede">Retrieval-Augmented Generation — модель не хранит все ваши данные в весах, поэтому перед ответом система находит релевантные фрагменты знаний и подставляет их прямо в промпт как контекст.</p>
+
+      <div class="block">
+        <h3>Как устроен пайплайн</h3>
+        <ul>
+          <li><strong>Чанкинг.</strong> Документы режутся на фрагменты — по смысловым блокам, а не по случайному числу символов.</li>
+          <li><strong>Эмбеддинги.</strong> Каждый фрагмент превращается в вектор — числовое представление его смысла.</li>
+          <li><strong>Векторная база.</strong> Векторы хранятся так, чтобы быстро находить похожие по смыслу фрагменты.</li>
+          <li><strong>Retrieval.</strong> По вопросу пользователя система ищет наиболее релевантные фрагменты.</li>
+          <li><strong>Генерация.</strong> Найденные фрагменты подставляются в промпт, и модель отвечает, опираясь именно на них.</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <h3>Когда RAG действительно нужен</h3>
+        <p>Когда ответы должны опираться на конкретные, часто меняющиеся или приватные данные — внутреннюю базу знаний, документацию продукта, свежую нормативку — то есть на всё, что дорого зашивать через файн-тюнинг.</p>
+      </div>
+
+      <div class="warn-box">
+        <strong>Частые ошибки</strong>
+        Слишком крупные чанки размывают релевантность поиска, слишком мелкие — теряют контекст вокруг факта. Качество разбиения документов почти всегда важнее выбора модели эмбеддингов.
+      </div>
+
+      <button class="back-up" data-scene="2">← назад к планетам</button>
+    </div>
+  </section>
+
+  <section id="agents" class="lesson">
+    <div class="lesson-card">
+      <span class="kicker">03 · Агенты</span>
+      <h2>ИИ-агенты</h2>
+      <p class="lede">Агент — это модель, помещённая в цикл: она не отвечает один раз, а сама решает, какой следующий шаг сделать, вызывает инструменты и продолжает, пока задача не решена.</p>
+
+      <div class="block">
+        <h3>Цикл работы агента</h3>
+        <ul>
+          <li><strong>Думать.</strong> Модель оценивает состояние задачи и выбирает следующее действие.</li>
+          <li><strong>Действовать.</strong> Вызывается инструмент — поиск, код, API, работа с файлами.</li>
+          <li><strong>Наблюдать.</strong> Результат действия возвращается модели как новый контекст.</li>
+          <li>Цикл повторяется, пока задача не решена или не сработал лимит шагов.</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <h3>Из чего собран агент</h3>
+        <ul>
+          <li><strong>Инструменты.</strong> Чётко описанные функции — от их набора зависит, что агент способен сделать.</li>
+          <li><strong>Память.</strong> Что агент помнит внутри запуска и между запусками.</li>
+          <li><strong>Планирование.</strong> Разбиение крупной цели на подзадачи.</li>
+          <li><strong>Ограничители.</strong> Лимит шагов и бюджет по токенам — без них агент может уйти в бесконечный цикл.</li>
+        </ul>
+      </div>
+
+      <div class="warn-box">
+        <strong>Риски</strong>
+        Агенты могут зацикливаться и вызывать инструменты с неверными аргументами. Лимит шагов и логирование каждого действия обязательны для продакшена.
+      </div>
+
+      <button class="back-up" data-scene="3">← назад к планетам</button>
+    </div>
+  </section>
+
+  <section id="tuning" class="lesson">
+    <div class="lesson-card">
+      <span class="kicker">04 · Файн-тюнинг</span>
+      <h2>Файн-тюнинг</h2>
+      <p class="lede">Дообучение меняет саму модель, а не то, что ей показывают в промпте. Это самый дорогой и медленный инструмент — к нему стоит переходить только после того, как исчерпаны более дешёвые варианты.</p>
+
+      <div class="block">
+        <h3>Порядок выбора инструмента</h3>
+        <ul>
+          <li>Сначала — <strong>промпт-инжиниринг.</strong> Проверяется за минуты.</li>
+          <li>Затем — <strong>RAG</strong>, если проблема в нехватке актуальных или приватных знаний.</li>
+          <li>И только потом — <strong>файн-тюнинг</strong>, если нужно изменить стиль или узкий навык модели.</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <h3>Основные виды</h3>
+        <ul>
+          <li><strong>Полный файн-тюнинг.</strong> Обновляются все веса модели — дорого, применяется редко.</li>
+          <li><strong>LoRA и другие PEFT-методы.</strong> Обучается небольшой набор параметров — дешевле и практичнее для большинства задач.</li>
+          <li><strong>Инструктивное дообучение и RLHF.</strong> Модель настраивается следовать инструкциям и предпочтениям людей.</li>
+        </ul>
+      </div>
+
+      <div class="warn-box">
+        <strong>Риски</strong>
+        Переобучение на маленьком датасете и «катастрофическое забывание» общих навыков. Качество и разнообразие данных важнее их количества.
+      </div>
+
+      <button class="back-up" data-scene="4">← назад к планетам</button>
+    </div>
+  </section>
+
+  <section id="eval" class="lesson">
+    <div class="lesson-card">
+      <span class="kicker">05 · Оценка</span>
+      <h2>Оценка моделей</h2>
+      <p class="lede">Без измерения нельзя понять, стал ли новый промпт, RAG-пайплайн или дообученная модель лучше — оценка превращает интуицию в проверяемый результат.</p>
+
+      <div class="block">
+        <h3>Виды оценки</h3>
+        <ul>
+          <li><strong>Автоматические метрики.</strong> Считаются быстро, но плохо ловят смысловые ошибки.</li>
+          <li><strong>Оценка людьми.</strong> Точнее, но медленная и дорогая.</li>
+          <li><strong>LLM-as-judge.</strong> Одна модель оценивает другую по заданным критериям — компромисс между скоростью и качеством.</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <h3>Что нужно для честной оценки</h3>
+        <ul>
+          <li><strong>Тестовый набор</strong>, отражающий реальные запросы, включая сложные случаи.</li>
+          <li><strong>Критерии, зафиксированные заранее</strong> — до того, как смотреть на ответы.</li>
+          <li><strong>Регулярный прогон</strong> при каждом изменении промпта, пайплайна или модели.</li>
+        </ul>
+      </div>
+
+      <div class="tip">
+        <strong>Упражнение</strong>
+        Возьмите десять реальных запросов из своего проекта, пропишите для каждого критерий «хорошего» ответа и оцените текущую версию вручную — это уже рабочий мини-eval.
+      </div>
+
+      <button class="back-up" data-scene="5">← назад к планетам</button>
+    </div>
+  </section>
+
+  <section id="advice" class="lesson">
+    <div class="lesson-card">
+      <span class="kicker">06 · Советы</span>
+      <h2>Какой ИИ для чего выбрать</h2>
+      <p class="lede">Единой «лучшей» модели не существует — у каждой свой профиль сильных сторон. Вот на что реально смотреть при выборе, без привязки к маркетингу.</p>
+
+      <div class="block">
+        <h3>По типам моделей</h3>
+        <ul>
+          <li><strong>ChatGPT / GPT.</strong> Самый универсальный вариант на каждый день — тексты, код, файлы, изображения, огромная экосистема плагинов и интеграций. Хороший выбор по умолчанию, если не знаете, с чего начать.</li>
+          <li><strong>Claude.</strong> Сильнее всего в работе с длинными документами, аккуратном письме и точном следовании сложным инструкциям. Основной выбор разработчиков, которым важна дисциплина в коде и стабильность поведения.</li>
+          <li><strong>Gemini.</strong> Лидер по мультимодальности — нативно понимает видео и аудио, а не просто транскрибирует. Огромное контекстное окно и глубокая интеграция с сервисами Google делают его удобным для анализа больших объёмов материалов.</li>
+          <li><strong>Открытые модели (Llama, Mistral, DeepSeek и похожие).</strong> Заметно дешевле, можно запускать на своих серверах — то есть данные никуда не уходят. Чуть уступают топ-моделям на самых сложных задачах, но отлично подходят для приватных или высокообъёмных сценариев.</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <h3>По задаче, а не по бренду</h3>
+        <ul>
+          <li><strong>Пишете код и рефакторите большую базу</strong> — берите модель с сильными результатами именно на кодовых бенчмарках и с длинным контекстом; на момент выбора стоит свериться с актуальным сравнением, эти цифры быстро меняются.</li>
+          <li><strong>Работаете с приватными или чувствительными данными</strong> — открытая модель с локальным или self-hosted развёртыванием почти всегда безопаснее облачного сервиса.</li>
+          <li><strong>Нужно «посмотреть» видео или расшифровать встречу</strong> — выбирайте модель с нативной мультимодальностью, а не транскрипцию плюс текстовую модель отдельно.</li>
+          <li><strong>Много одинаковых лёгких задач в продакшене</strong> — считайте по стоимости за миллион токенов, а не по флагманскому бренду: младшие и открытые модели часто справляются не хуже за долю цены.</li>
+        </ul>
+      </div>
+
+      <div class="tip">
+        <strong>Практика</strong>
+        Не привязывайтесь к одной модели навсегда. Многие команды используют две-три модели параллельно, направляя каждую задачу туда, где она сильнее, и периодически пересматривают выбор — рейтинги в этой области устаревают за месяцы, а не годы.
+      </div>
+
+      <button class="back-up" data-scene="6">← назад к планетам</button>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">6 модулей · курс обновляется</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
