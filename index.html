@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ИИ-Инженеринг — Космический Портал</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <canvas id="starsCanvas"></canvas>
+    <canvas id="particlesCanvas"></canvas>
+    
+    <div class="sun-container">
+        <div class="sun-core"></div>
+        <div class="sun-inner-glow"></div>
+        <div class="sun-outer-glow"></div>
+        <div class="sun-flare sun-flare-1"></div>
+        <div class="sun-flare sun-flare-2"></div>
+        <div class="sun-flare sun-flare-3"></div>
+        <div class="sun-flare sun-flare-4"></div>
+        <div class="sun-flare sun-flare-5"></div>
+        <div class="corona corona-1"></div>
+        <div class="corona corona-2"></div>
+        <div class="corona corona-3"></div>
+    </div>
+
+    <div class="planet planet-mercury"></div>
+    <div class="planet planet-venus"></div>
+    <div class="planet planet-earth">
+        <div class="moon"></div>
+    </div>
+    <div class="planet planet-mars"></div>
+    <div class="planet planet-jupiter"></div>
+    <div class="planet planet-saturn">
+        <div class="ring"></div>
+    </div>
+
+    <div class="asteroid-belt"></div>
+    
+    <div class="comet comet-1"></div>
+    <div class="comet comet-2"></div>
+    <div class="comet comet-3"></div>
+
+    <div class="shooting-stars-container">
+        <div class="shooting-star star-1"></div>
+        <div class="shooting-star star-2"></div>
+        <div class="shooting-star star-3"></div>
+    </div>
+
+    <div class="nebula-cloud nebula-purple"></div>
+    <div class="nebula-cloud nebula-blue"></div>
+    <div class="nebula-cloud nebula-teal"></div>
+
+    <div class="vignette"></div>
+    <div class="scanlines"></div>
+
+    <header class="main-header">
+        <div class="header-constellation constellation-left"></div>
+        <div class="header-content">
+            <h1 class="title-main">
+                <span class="title-line line-1">ИСКУССТВЕННЫЙ</span>
+                <span class="title-line line-2">ИНТЕЛЛЕКТ</span>
+                <span class="title-line line-3">ИНЖЕНЕРИНГ</span>
+            </h1>
+            <div class="title-divider">
+                <span class="divider-star">✦</span>
+                <span class="divider-line"></span>
+                <span class="divider-star">✦</span>
+                <span class="divider-line"></span>
+                <span class="divider-star">✦</span>
+            </div>
+            <p class="subtitle">ПОРТАЛ ЗНАНИЙ ВО ВСЕЛЕННОЙ ТЕХНОЛОГИЙ</p>
+            <div class="header-badge">26.09.2025</div>
+        </div>
+        <div class="header-constellation constellation-right"></div>
+    </header>
+
+    <nav class="main-nav">
+        <button class="nav-btn" data-target="basics">
+            <span class="btn-number">01</span>
+            <span class="btn-label">Основы ИИ</span>
+            <span class="btn-icon">🧠</span>
+            <span class="btn-glow"></span>
+        </button>
+        <button class="nav-btn" data-target="learning">
+            <span class="btn-number">02</span>
+            <span class="btn-label">Обучение</span>
+            <span class="btn-icon">📚</span>
+            <span class="btn-glow"></span>
+        </button>
+        <button class="nav-btn" data-target="models">
+            <span class="btn-number">03</span>
+            <span class="btn-label">Какой ИИ для чего</span>
+            <span class="btn-icon">🤖</span>
+            <span class="btn-glow"></span>
+        </button>
+        <button class="nav-btn" data-target="engineering">
+            <span class="btn-number">04</span>
+            <span class="btn-label">Инженеринг</span>
+            <span class="btn-icon">⚙️</span>
+            <span class="btn-glow"></span>
+        </button>
+        <button class="nav-btn" data-target="prompts">
+            <span class="btn-number">05</span>
+            <span class="btn-label">Промпты</span>
+            <span class="btn-icon">💬</span>
+            <span class="btn-glow"></span>
+        </button>
+        <button class="nav-btn" data-target="tools">
+            <span class="btn-number">06</span>
+            <span class="btn-label">Инструменты</span>
+            <span class="btn-icon">🔧</span>
+            <span class="btn-glow"></span>
+        </button>
+    </nav>
+
+    <section id="basics" class="page-modal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div class="modal-scroll">
+                <h2 class="modal-title">🧠 Основы Искусственного Интеллекта</h2>
+                <div class="modal-divider"></div>
+                
+                <div class="content-block">
+                    <h3>Что такое Искусственный Интеллект?</h3>
+                    <p>Искусственный интеллект (ИИ) — это область компьютерных наук, занимающаяся созданием систем, способных выполнять задачи, традиционно требующие человеческого интеллекта. Это включает распознавание речи, принятие решений, визуальное восприятие, перевод языков и многое другое.</p>
+                    <p>Современный ИИ делится на три основные категории: Узкий ИИ (ANI) — специализируется на одной задаче; Общий ИИ (AGI) — гипотетический уровень человеческого интеллекта; и Суперинтеллект (ASI) — превосходящий человеческие способности.</p>
+                </div>
+
+                <div class="content-block">
+                    <h3>Машинное Обучение (Machine Learning)</h3>
+                    <p>Машинное обучение — это подмножество ИИ, где алгоритмы обучаются на данных без явного программирования. Вместо того чтобы писать правила, вы предоставляете данные, и алгоритм находит закономерности самостоятельно.</p>
+                    <p>Ключевой принцип: модель учится на исторических данных, чтобы делать прогнозы или принимать решения на новых данных. Чем больше качественных данных, тем лучше результат.</p>
+                </div>
+
+                <div class="content-block">
+                    <h3>Типы Машинного Обучения</h3>
+                    <h4>Обучение с учителем (Supervised Learning)</h4>
+                    <p>Модель обучается на размеченных данных. Каждый пример имеет входные признаки и правильный ответ (метку). Задача — научиться предсказывать метки для новых данных. Примеры: классификация спама, прогноз цен на недвижимость, диагностика заболеваний по снимкам. Алгоритмы: линейная регрессия, деревья решений, случайный лес, градиентный бустинг, нейронные сети.</p>
+                    
+                    <h4>Обучение без учителя (Unsupervised Learning)</h4>
+                    <p>Модель работает с неразмеченными данными, самостоятельно находя скрытые структуры и закономерности. Задачи: кластеризация (группировка похожих объектов), понижение размерности, обнаружение аномалий. Алгоритмы: K-means, DBSCAN, PCA, t-SNE, автоэнкодеры.</p>
+                    
+                    <h4>Обучение с подкреплением (Reinforcement Learning)</h4>
+                    <p>Агент учится через взаимодействие со средой, получая награды или штрафы за свои действия. Цель — максимизировать суммарную награду. Применяется в играх (AlphaGo), робототехнике, автономном вождении, оптимизации ресурсов. Алгоритмы: Q-learning, Deep Q-Networks, Policy Gradient, PPO.</p>
+                    
+                    <h4>Частичное обучение (Semi-supervised Learning)</h4>
+                    <p>Комбинирует размеченные и неразмеченные данные. Полезно, когда разметка дорогая или трудоёмкая. Модель использует небольшой набор размеченных данных и большой набор неразмеченных для улучшения точности.</p>
+                    
+                    <h4>Самообучение (Self-supervised Learning)</h4>
+                    <p>Модель создаёт собственные метки из неразмеченных данных, формулируя вспомогательные задачи. Например, предсказание следующего слова в тексте (GPT) или восстановление искажённого изображения. Это основа современных больших языковых моделей.</p>
+                </div>
+
+                <div class="content-block">
+                    <h3>Глубокое Обучение (Deep Learning)</h3>
+                    <p>Глубокое обучение — это подмножество машинного обучения, использующее многослойные нейронные сети. Каждый слой извлекает всё более абстрактные признаки из данных. Глубокие сети могут иметь сотни слоёв и миллиарды параметров.</p>
+                    <p>Ключевые архитектуры: Свёрточные нейронные сети (CNN) для изображений и видео, Рекуррентные нейронные сети (RNN, LSTM, GRU) для последовательностей и текста, Трансформеры (Transformers) — революционная архитектура для NLP и не только, Генеративно-состязательные сети (GAN) для создания нового контента, Диффузионные модели для генерации изображений.</p>
+                </div>
+
+                <div class="content-block">
+                    <h3>Нейронные Сети: Как они работают</h3>
+                    <p>Нейронная сеть состоит из слоёв взаимосвязанных узлов (нейронов). Каждый нейрон принимает взвешенную сумму входных сигналов, применяет функцию активации и передаёт результат дальше. Обучение происходит через обратное распространение ошибки (backpropagation) и градиентный спуск: сеть делает предсказание, вычисляет ошибку, и корректирует веса, чтобы уменьшить ошибку.</p>
+                    <p>Функции активации: ReLU (самая популярная), Sigmoid, Tanh, Leaky ReLU, GELU, Swish. Оптимизаторы: SGD, Adam, AdamW, RMSprop. Функции потерь: MSE для регрессии, Cross-Entropy для классификации.</p>
+                </div>
+
+                <div class="content-block">
+                    <h3>Большие Языковые Модели (LLM)</h3>
+                    <p>LLM — это нейронные сети с миллиардами параметров, обученные на огромных текстовых корпусах. Они используют архитектуру Transformer с механизмом внимания (attention). Модели вроде GPT, Claude, Gemini, LLaMA понимают и генерируют текст на уровне человека. Ключевые концепции: токенизация (разбиение текста на токены), эмбеддинги (векторные представления), контекстное окно (сколько токенов модель может обработать за раз), температура (контроль случайности генерации).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="learning" class="page-modal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div class="modal-scroll">
+                <h2 class="modal-title">📚 Обучение ИИ-Инженерингу</h2>
+                <div class="modal-divider"></div>
+
+                <div class="content-block">
+                    <h3>Фундаментальные Знания</h3>
+                    <p>Путь ИИ-инженера начинается с прочного фундамента. Без понимания базовых концепций дальнейшее обучение будет неэффективным. Инвестируйте время в основы — это окупится многократно.</p>
+                    
+                    <h4>Математика</h4>
+                    <p><strong>Линейная алгебра:</strong> векторы, матрицы, операции над ними, собственные значения и векторы, SVD-разложение — основа всех нейронных сетей. <strong>Математический анализ:</strong> производные, градиенты, частные производные, цепное правило — необходимо для понимания backpropagation. <strong>Теория вероятностей и статистика:</strong> распределения, байесовский вывод, математическое ожидание, дисперсия, проверка гипотез — фундамент для понимания неопределённости в моделях. <strong>Оптимизация:</strong> градиентный спуск и его варианты, выпуклая оптимизация, методы второго порядка.</p>
+                    
+                    <h4>Программирование</h4>
+                    <p><strong>Python</strong> — безальтернативный язык для ИИ. Необходимо освоить: синтаксис, ООП, функциональное программирование, декораторы, генераторы, асинхронное программирование. <strong>Библиотеки:</strong> NumPy (работа с массивами), Pandas (обработка данных), Matplotlib/Seaborn (визуализация), Scikit-learn (классический ML).</p>
+                </div>
+
+                <div class="content-block">
+                    <h3>Roadmap: От Новичка до Профессионала</h3>
+                    
+                    <h4>Этап 1: Основы (1-3 месяца)</h4>
+                    <p>Python на уровне уверенного использования. Математические основы. Понимание типов данных и базовых алгоритмов. Первое знакомство с NumPy и Pandas. Линейная регрессия и логистическая регрессия своими руками. Работа с Jupyter Notebooks. Знакомство с Git и GitHub.</p>
+                    
+                    <h4>Этап 2: Классический ML (2-4 месяца)</h4>
+                    <p>Scikit-learn: полный цикл — предобработка данных, выбор модели, обучение, валидация, настройка гиперпараметров. Деревья решений, случайный лес, градиентный бустинг (XGBoost, LightGBM, CatBoost). SVM, kNN, наивный Байес. Кросс-валидация, борьба с переобучением, регуляризация. Метрики качества: accuracy, precision, recall, F1, ROC-AUC, RMSE, MAE. Feature engineering и отбор признаков.</p>
+                    
+                    <h4>Этап 3: Глубокое Обучение (3-6 месяцев)</h4>
+                    <p>PyTorch или TensorFlow/Keras. Полносвязные сети, CNN для компьютерного зрения (классификация, детекция, сегментация). RNN, LSTM, GRU для последовательностей и временных рядов. Transfer learning: использование предобученных моделей. Техники регуляризации: Dropout, Batch Normalization, Layer Normalization. Планирование скорости обучения, ранняя остановка, сохранение чекпоинтов.</p>
+                    
+                    <h4>Этап 4: Специализация (4-8 месяцев)</h4>
+                    <p><strong>NLP:</strong> Трансформеры, BERT, GPT, T5. Токенизация, эмбеддинги, attention. Hugging Face библиотеки. <strong>Computer Vision:</strong> YOLO, Mask R-CNN, ViT, диффузионные модели, GAN. <strong>RL:</strong> OpenAI Gym, Stable Baselines, Policy Gradient методы. <strong>MLOps:</strong> Docker, Kubernetes, MLflow, DVC, CI/CD для ML, мониторинг моделей в продакшене.</p>
+                    
+                    <h4>Этап 5: Продакшен и Экспертиза (6+ месяцев)</h4>
+                    <p>Проектирование ML-систем. Оптимизация инференса: квантизация, прунинг, дистилляция. Распределённое обучение. Облачные сервисы: AWS SageMaker, GCP Vertex AI, Azure ML. LLMOps: развёртывание и мониторинг LLM, RAG-системы, агенты. MLOps level 2: автоматические пайплайны, A/B тестирование моделей.</p>
+                </div>
+
+                <div class="content-block">
+                    <h3>Ресурсы для Обучения</h3>
+                    <h4>Курсы</h4>
+                    <p><strong>Machine Learning Specialization</strong> от Andrew Ng (Coursera) — лучший старт. <strong>Deep Learning Specialization</strong> (deeplearning.ai) — продолжение. <strong>Fast.ai Practical Deep Learning</strong> — практический подход сверху-вниз. <strong>CS231n Stanford</strong> — компьютерное зрение. <strong>CS224n Stanford</strong> — NLP. <strong>Full Stack Deep Learning</strong> — продакшен ML. <strong>Hugging Face NLP Course</strong> — современные трансформеры.</p>
+                    
+                    <h4>Книги</h4>
+                    <p>"Deep Learning" Ian Goodfellow — библия глубокого обучения. "Hands-On Machine Learning" Aurélien Géron — практическое руководство. "Pattern Recognition and Machine Learning" Christopher Bishop — математический фундамент. "Designing Machine Learning Systems" Chip Huyen — проектирование систем. "The Hundred-Page Machine Learning Book" Andriy Burkov — краткий обзор всего.</p>
+                    
+                    <h4>Практика</h4>
+                    <p>Kaggle — соревнования и датасеты. Собственные проекты на GitHub. Open-source контрибуции. Хакатоны. Стажировки. Papers With Code — воспроизведение научных статей.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="models" class="page-modal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div class="modal-scroll">
+                <h2 class="modal-title">🤖 Какой ИИ Для Чего Идеален</h2>
+                <div class="modal-divider"></div>
+
+                <div class="content-block">
+                    <h3>Большие Языковые Модели (LLM)</h3>
+                    
+                    <h4>GPT-4o — Универсальный Интеллект</h4>
+                    <p><strong>Модель:</strong> OpenAI GPT-4o (omni). <strong>Для чего идеален:</strong> Универсальный инструмент для генерации текста, написания кода, анализа данных, творческих задач, перевода, суммаризации. Мультимодальность: понимает изображения, может читать текст с картинок. <strong>Сильные стороны:</strong> Самая сбалансированная модель по соотношению скорость/качество/цена. Отлично пишет код на Python, JavaScript, TypeScript. Хорошо структурирует информацию. <strong>Слабые стороны:</strong> Иногда излишне "креативен" в фактах. Контекстное окно 128K токенов. <strong>Доступ:</strong> ChatGPT, API, Microsoft Copilot.</p>
+                    
+                    <h4>Claude 3.5 Sonnet — Глубокий Аналитик</h4>
+                    <p><strong>Модель:</strong> Anthropic Claude 3.5 Sonnet. <strong>Для чего идеален:</strong> Глубокий анализ длинных документов, написание сложных технических текстов, рецензирование кода, научные обзоры, юридический анализ. <strong>Сильные стороны:</strong> Контекстное окно 200K токенов — можно загрузить целую книгу. Очень точен в фактах, меньше галлюцинирует. Отличное понимание нюансов и подтекста. <strong>Слабые стороны:</strong> Медленнее GPT-4o. Более консервативен в творческих задачах. <strong>Доступ:</strong> claude.ai, API, Amazon Bedrock.</p>
+                    
+                    <h4>Gemini 1.5 Pro — Мультимодальный Гигант</h4>
+                    <p><strong>Модель:</strong> Google Gemini 1.5 Pro. <strong>Для чего идеален:</strong> Обработка видео и аудио, анализ больших объёмов мультимодальных данных. Может проанализировать часовое видео или 11 часов аудио за один запрос. <strong>Сильные стороны:</strong> Контекстное окно до 2 миллионов токенов — абсолютный рекорд. Нативная мультимодальность (не прикрученная сверху). Интеграция с экосистемой Google. <strong>Слабые стороны:</strong> Качество текстовой генерации немного уступает GPT-4o и Claude. <strong>Доступ:</strong> Google AI Studio, Vertex AI, Gemini Advanced.</p>
+                    
+                    <h4>LLaMA 3 70B — Опенсорсный Король</h4>
+                    <p><strong>Модель:</strong> Meta LLaMA 3 70B Instruct. <strong>Для чего идеален:</strong> Когда нужна open-source модель, контроль над данными, возможность файнтюна, запуск на своей инфраструктуре. <strong>Сильные стороны:</strong> Бесплатный, можно модифицировать, запускать локально. Качество близко к проприетарным моделям. <strong>Слабые стороны:</strong> Требует мощного железа для запуска (нужна GPU с 40+ ГБ VRAM для полной точности). <strong>Доступ:</strong> Hugging Face, Ollama, Groq (быстрый инференс).</p>
+                    
+                    <h4>Mistral Large 2 — Европейский Интеллект</h4>
+                    <p><strong>Модель:</strong> Mistral AI Mistral Large 2. <strong>Для чего идеален:</strong> Многоязычные задачи, особенно с европейскими языками. Хорош в коде, математике, логических рассуждениях. <strong>Сильные стороны:</strong> Отличная поддержка французского, немецкого, испанского. Сильные способности к рассуждению. Более эффективен по затратам, чем GPT-4. <strong>Слабые стороны:</strong> Меньше экосистема и сообщество. <strong>Доступ:</strong> Le Chat, API, Azure AI.</p>
+                </div>
+
+                <div class="content-block">
+                    <h3>Генерация Изображений</h3>
+                    
+                    <h4>DALL-E 3 — Фотореализм</h4>
+                    <p><strong>Модель:</strong> OpenAI DALL-E 3. <strong>Для чего идеален:</strong> Реалистичные изображения по текстовому описанию. Точное следование промпту. Интегрирован в ChatGPT. <strong>Сильные стороны:</strong> Понимает сложные промпты, хорошо передаёт детали, освещение, текстуры. Умеет писать текст на изображениях. Встроенная защита от нежелательного контента. <strong>Слабые стороны:</strong> Меньше художественной свободы, чем у Midjourney. <strong>Доступ:</strong> ChatGPT Plus, API.</p>
+                    
+                    <h4>Midjourney 6 — Художественный Гений</h4>
+                    <p><strong>Модель:</strong> Midjourney 6. <strong>Для чего идеален:</strong> Художественные, стилизованные изображения. Концепт-арт, иллюстрации, дизайн. <strong>Сильные стороны:</strong> Непревзойдённое качество в художественном стиле. Эстетика, композиция, цветовые решения на высшем уровне. Огромное комьюнити и база стилей. <strong>Слабые стороны:</strong> Только через Discord, нет API. Слабее в фотореализме, чем DALL-E 3. <strong>Доступ:</strong> Discord бот, веб-версия.</p>
+                    
+                    <h4>Stable Diffusion 3 — Локальный Генератор</h4>
+                    <p><strong>Модель:</strong> Stability AI Stable Diffusion 3. <strong>Для чего идеален:</strong> Генерация на своём компьютере, полный контроль, возможность дообучения на своих данных. <strong>Сильные стороны:</strong> Open-source, бесплатный, работает на GPU с 8+ ГБ VRAM. Тысячи моделей и LoRA от сообщества. Полный контроль и приватность. <strong>Слабые стороны:</strong> Требует технических знаний для настройки. <strong>Доступ:</strong> Hugging Face, Automatic1111 WebUI, ComfyUI.</p>
+                    
+                    <h4>Adobe Firefly — Для Дизайнеров</h4>
+                    <p><strong>Модель:</strong> Adobe Firefly. <strong>Для чего идеален:</strong> Коммерческое использование, интеграция с Photoshop, Illustrator. Генеративная заливка, расширение изображений. <strong>Сильные стороны:</strong> Легально чистые данные для обучения. Интеграция в рабочий процесс дизайнера. Безопасно для коммерции. <strong>Слабые стороны:</strong> Требует подписки Adobe. <strong>Доступ:</strong> Adobe Creative Cloud.</p>
+                </div>
+
+                <div class="content-block">
+                    <h3>Генерация Видео</h3>
+                    
+                    <h4>Sora — Революция Видео</h4>
+                    <p><strong>Модель:</strong> OpenAI Sora. <strong>Для чего идеален:</strong> Генерация реалистичного видео до минуты по текстовому описанию. Понимает физику, движение, причинно-следственные связи. <strong>Доступ:</strong> Ограниченный доступ.</p>
+                    
+                    <h4>Runway Gen-3 — Профессиональное Видео</h4>
+                    <p><strong>Модель:</strong> Runway Gen-3 Alpha. <strong>Для чего идеален:</strong> Профессиональная генерация видео, спецэффекты, постпродакшен. <strong>Доступ:</strong> Веб-платформа, API.</p>
+                    
+                    <h4>Kling — Китайский Прорыв</h4>
+                    <p><strong>Модель:</strong> Kuaishou Kling. <strong>Для чего идеален:</strong> Генерация видео до 2 минут, качество сравнимо с Sora. <strong>Доступ:</strong> Международная версия доступна.</p>
+                </div>
+
+                <div class="content-block">
+                    <h3>Генерация Кода</h3>
+                    
+                    <h4>GitHub Copilot — Помощник Разработчика</h4>
+                    <p><strong>Модель:</strong> OpenAI Codex (GPT-4o). <strong>Для чего идеален:</strong> Автодополнение кода в IDE. Поддержка всех популярных языков и фреймворков. Интеграция с VS Code, JetBrains, Neovim. <strong>Сильные стороны:</strong> Понимает контекст проекта. Предлагает целые функции. Учится на вашем стиле кода. <strong>Доступ:</strong> Подписка GitHub.</p>
+                    
+                    <h4>Cursor — AI-First IDE</h4>
+                    <p><strong>Модель:</strong> GPT-4o, Claude 3.5 Sonnet. <strong>Для чего идеален:</strong> Полноценная IDE с глубокой интеграцией ИИ. Редактирование кода на естественном языке. Понимание всего проекта. <strong>Доступ:</strong> cursor.com.</p>
+                    
+                    <h4>Devin — AI-разработчик</h4>
+                    <p><strong>Модель:</strong> Cognition AI Devin. <strong>Для чего идеален:</strong> Автономное решение задач разработки. Сам пишет код, тестирует, дебажит, деплоит. <strong>Доступ:</strong> Ранний доступ.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="engineering" class="page-modal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div class="modal-scroll">
+                <h2 class="modal-title">⚙️ Инженеринг ИИ-Систем</h2>
+                <div class="modal-divider"></div>
+
+                <div class="content-block">
+                    <h3>Жизненный Цикл ML-Проекта</h3>
+                    <p>Инженеринг ИИ-систем — это не просто обучение модели. Это полный цикл от постановки бизнес-задачи до мониторинга модели в продакшене. Ключевые этапы: Определение проблемы и метрик успеха, Сбор и разметка данных, Разведочный анализ данных (EDA), Построение baseline модели, Итеративное улучшение, Деплой в продакшен, Мониторинг и поддержка.</p>
+                </div>
+
+                <div class="content-block">
+                    <h3>MLOps — Операционализация ML</h3>
+                    <p>MLOps (Machine Learning Operations) — это практики и инструменты для надёжного и эффективного развёртывания и поддержки ML-моделей в продакшене. Вдохновлён DevOps, но с учётом специфики ML: данные, модели, эксперименты.</p>
+                    
+                    <h4>Ключевые компоненты MLOps</h4>
+                    <p><strong>Версионирование данных:</strong> DVC (Data Version Control), Git LFS, Delta Lake — отслеживание изменений в датасетах, как в коде. <strong>Версионирование моделей:</strong> MLflow Model Registry, W&B Models — хранение и версионирование обученных моделей. <strong>Отслеживание экспериментов:</strong> MLflow Tracking, Weights & Biases, TensorBoard — запись гиперпараметров, метрик, артефактов. <strong>Пайплайны:</strong> Apache Airflow, Kubeflow Pipelines, Prefect — автоматизация последовательности шагов от данных до деплоя. <strong>Feature Store:</strong> Feast, Tecton — централизованное хранилище и сервинг признаков. <strong>Model Serving:</strong> TensorFlow Serving, TorchServe, Triton Inference Server, BentoML — развёртывание моделей как API.</p>
+                </div>
+
+                <div class="content-block">
+                    <h3>Инфраструктура</h3>
+                    
+                    <h4>Обучение</h4>
+                    <p>Одиночная GPU (RTX 4090, A6000) для экспериментов и небольших моделей. Кластер GPU (A100, H100) для обучения больших моделей. Распределённое обучение: Data Parallelism, Model Parallelism, Pipeline Parallelism. DeepSpeed, FSDP для эффективного использования памяти.</p>
+                    
+                    <h4>Инференс</h4>
+                    <p>Оптимизация: квантизация (INT8, INT4), прунинг, дистилляция знаний, компиляция (TensorRT, ONNX Runtime). Кэширование запросов для снижения задержки. Автоскейлинг в зависимости от нагрузки. Балансировка между стоимостью и задержкой.</p>
+                    
+                    <h4>Облачные Платформы</h4>
+                    <p><strong>AWS:</strong> SageMaker (полный цикл), Bedrock (управляемые LLM), Inferentia (чипы для инференса). <strong>GCP:</strong> Vertex AI, Cloud TPU, Gemini API. <strong>Azure:</strong> Azure ML, OpenAI Service. <strong>On-premise:</strong> Kubernetes + Kubeflow для полного контроля.</p>
+                </div>
+
+                <div class="content-block">
+                    <h3>LLMOps — Особенности Работы с LLM</h3>
+                    <p>Большие языковые модели требуют особого подхода. Ключевые отличия от классического MLOps: Промпт-инженеринг как часть кода, RAG (Retrieval-Augmented Generation) для работы с собственными данными, Цепочки и агенты (LangChain, LlamaIndex), Сложный мониторинг качества ответов (нет единственной правильной метрики), Управление токенами и стоимостью API-вызовов, Защита от инъекций и jailbreak-атак.</p>
+                    
+                    <h4>RAG — Retrieval-Augmented Generation</h4>
+                    <p>RAG — это архитектура, где перед генерацией ответа LLM получает релевантные документы из внешнего хранилища. Компоненты: Эмбеддинг-модель (превращает текст в векторы), Векторная база данных (Pinecone, Weaviate, Chroma, Qdrant), Поисковый модуль (семантический поиск), LLM для генерации ответа с учётом найденного контекста. RAG позволяет моделям работать с актуальными данными без переобучения.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="prompts" class="page-modal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div class="modal-scroll">
+                <h2 class="modal-title">💬 Промпт-Инженеринг</h2>
+                <div class="modal-divider"></div>
+
+                <div class="content-block">
+                    <h3>Искусство Общения с ИИ</h3>
+                    <p>Промпт-инженеринг — это практика проектирования входных данных для языковых моделей с целью получения желаемых результатов. Это одновременно наука и искусство. Хороший промпт может превратить посредственный ответ в выдающийся.</p>
+                </div>
+
+                <div class="content-block">
+                    <h3>Структура Эффективного Промпта</h3>
+                    <p><strong>Роль (Persona):</strong> Определите, кем должна быть модель. "Ты — senior software engineer с 15-летним опытом". <strong>Контекст:</strong> Предоставьте всю необходимую информацию. "Мы работаем над проектом на Python с FastAPI и PostgreSQL". <strong>Задача:</strong> Чётко сформулируйте, что нужно сделать. "Напиши эндпоинт для создания пользователя с валидацией email". <strong>Формат ответа:</strong> Укажите желаемый формат. "Ответ должен быть в формате Markdown с пояснениями к каждому блоку кода". <strong>Ограничения:</strong> Задайте границы. "Используй только стандартную библиотеку. Код должен быть production-ready".</p>
+                </div>
+
+                <div class="content-block">
+                    <h3>Техники Промптинга</h3>
+                    
+                    <h4>Chain-of-Thought (CoT)</h4>
+                    <p>Заставьте модель рассуждать по шагам. Добавьте в промпт "Давай подумаем шаг за шагом" или "Think step by step". Это dramatically улучшает результаты в математических задачах, логических рассуждениях и сложном анализе. Модель проговаривает промежуточные шаги, что снижает вероятность ошибки.</p>
+                    
+                    <h4>Few-Shot Prompting</h4>
+                    <p>Предоставьте несколько примеров желаемого поведения до основного запроса. 2-3 примера обычно достаточно. Модель "понимает" паттерн и следует ему. Особенно полезно для специфических форматов вывода, классификации в нестандартных категориях, стилизации текста.</p>
+                    
+                    <h4>Self-Consistency</h4>
+                    <p>Запустите модель несколько раз с Chain-of-Thought и выберите наиболее частый ответ. Это работает как ансамблирование — разные пути рассуждения могут привести к разным результатам, и голосование повышает точность.</p>
+                    
+                    <h4>Tree of Thoughts (ToT)</h4>
+                    <p>Модель исследует несколько ветвей рассуждения одновременно, оценивает каждую и выбирает лучшую. Полезна для стратегического планирования, решения головоломок, написания сложного кода с альтернативными архитектурами.</p>
+                    
+                    <h4>ReAct (Reasoning + Acting)</h4>
+                    <p>Модель чередует рассуждения с действиями (поиск в интернете, выполнение кода, запрос к базе данных). Это основа современных AI-агентов. Модель думает, действует, наблюдает результат и думает снова.</p>
+                </div>
+
+                <div class="content-block">
+                    <h3>System Prompts — Системные Инструкции</h3>
+                    <p>System prompt задаёт глобальное поведение модели на протяжении всего диалога. Он имеет приоритет выше пользовательских сообщений. В system prompt определяют: роль и личность модели, правила поведения и ограничения, стиль общения, форматы ответов, знания и компетенции. Хороший system prompt — это инвестиция: написал один раз, пользуешься постоянно.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tools" class="page-modal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div class="modal-scroll">
+                <h2 class="modal-title">🔧 Инструменты ИИ-Инженера</h2>
+                <div class="modal-divider"></div>
+
+                <div class="content-block">
+                    <h3>Фреймворки Глубокого Обучения</h3>
+                    
+                    <h4>PyTorch</h4>
+                    <p>Доминирующий фреймворк в исследованиях и индустрии. Динамический граф вычислений — удобно для отладки. TorchScript для продакшена. torch.compile для ускорения. Экосистема: torchvision, torchaudio, torchtext. Hugging Face интегрирован глубоко. TorchServe для деплоя.</p>
+                    
+                    <h4>TensorFlow / Keras</h4>
+                    <p>Всё ещё широко используется в продакшене. Keras — высокоуровневый API, простой для начинающих. TensorFlow Serving — мощный сервинг. TF Lite для мобильных устройств. TF.js для браузера. Статический граф вычислений — эффективнее в продакшене.</p>
+                    
+                    <h4>JAX</h4>
+                    <p>Фреймворк от Google для высокопроизводительных вычислений. Автоматическая векторизация (vmap), дифференцирование (grad), компиляция (jit). Основа для многих современных моделей (PaLM, Gemini). Flax и Haiku — надстройки для нейронных сетей на JAX.</p>
+                </div>
+
+                <div class="content-block">
+                    <h3>Экосистема LLM</h3>
+                    
+                    <h4>LangChain</h4>
+                    <p>Фреймворк для создания приложений на базе LLM. Абстракции: Models, Prompts, Chains, Agents, Memory, Retrievers. Позволяет быстро прототипировать сложные LLM-приложения. Интеграция с десятками провайдеров моделей, векторных баз, инструментов.</p>
+                    
+                    <h4>LlamaIndex</h4>
+                    <p>Фреймворк для индексации и поиска данных для LLM. Специализируется на RAG: загрузка данных из разных источников, построение индексов, продвинутый поиск. Поддерживает иерархические индексы, графы знаний, рекурсивный retrieval.</p>
+                    
+                    <h4>Ollama</h4>
+                    <p>Запуск open-source LLM локально одной командой. Поддержка LLaMA, Mistral, Gemma, Phi и других. Автоматически скачивает, квантует и запускает модель. Идеально для разработки и тестирования без облачных API.</p>
+                    
+                    <h4>Hugging Face</h4>
+                    <p>Центральный хаб ML-моделей. Transformers — библиотека с тысячами предобученных моделей. Datasets — загрузка и обработка датасетов. Accelerate — упрощение распределённого обучения. PEFT — эффективный файнтюн (LoRA, Prefix Tuning).</p>
+                </div>
+
+                <div class="content-block">
+                    <h3>Векторные Базы Данных</h3>
+                    <p><strong>Pinecone:</strong> Управляемый сервис, простота, скорость. <strong>Weaviate:</strong> Open-source, гибридный поиск, GraphQL API. <strong>Chroma:</strong> Легковесная, встраиваемая, для прототипов. <strong>Qdrant:</strong> Высокая производительность, фильтрация, open-source. <strong>Milvus:</strong> Для масштаба, распределённая архитектура.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="main-footer">
+        <p>ИИ-Инженеринг — Портал Знаний</p>
+        <p class="footer-tag">Исследуй. Учись. Создавай.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
