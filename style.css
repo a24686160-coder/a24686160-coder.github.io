@@ -1,0 +1,304 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --space-dark: #000008;
+    --text-primary: #ffffff;
+    --text-secondary: #bcc0d0;
+    --accent: #ff8c00;
+    --accent-bright: #ffaa44;
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.08);
+}
+
+body {
+    background: #000008;
+    color: var(--text-primary);
+    font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+#starsCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* ===== ЧЁРНАЯ ДЫРА ===== */
+.black-hole-container {
+    position: fixed;
+    top: 55%;
+    left: 75%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 400px;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.black-hole-shadow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 320px;
+    height: 320px;
+    background: radial-gradient(circle,
+        #000000 0%,
+        #000005 30%,
+        #000010 45%,
+        rgba(0,0,0,0.6) 55%,
+        transparent 70%
+    );
+    border-radius: 50%;
+    z-index: 5;
+}
+
+.accretion-disk {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotateX(75deg);
+    width: 380px;
+    height: 380px;
+    border-radius: 50%;
+    background: conic-gradient(
+        from 0deg,
+        rgba(255, 200, 100, 0.15) 0deg,
+        rgba(255, 160, 60, 0.35) 45deg,
+        rgba(255, 220, 140, 0.6) 90deg,
+        rgba(255, 180, 80, 0.45) 135deg,
+        rgba(255, 140, 40, 0.2) 180deg,
+        rgba(100, 60, 200, 0.15) 225deg,
+        rgba(255, 160, 60, 0.3) 270deg,
+        rgba(255, 200, 100, 0.5) 315deg,
+        rgba(255, 200, 100, 0.15) 360deg
+    );
+    filter: blur(8px);
+    animation: diskSpin 8s linear infinite;
+    z-index: 2;
+}
+
+.accretion-disk-inner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotateX(75deg);
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: conic-gradient(
+        from 0deg,
+        rgba(255, 240, 200, 0.3) 0deg,
+        rgba(255, 200, 100, 0.7) 60deg,
+        rgba(255, 240, 200, 0.5) 120deg,
+        rgba(255, 180, 80, 0.4) 180deg,
+        rgba(200, 100, 255, 0.2) 240deg,
+        rgba(255, 200, 100, 0.6) 300deg,
+        rgba(255, 240, 200, 0.3) 360deg
+    );
+    filter: blur(4px);
+    animation: diskSpin 5s linear infinite reverse;
+    z-index: 3;
+}
+
+.photon-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 180, 80, 0.6);
+    box-shadow:
+        0 0 15px rgba(255, 180, 80, 0.4),
+        0 0 40px rgba(255, 140, 40, 0.2),
+        inset 0 0 15px rgba(255, 200, 100, 0.3);
+    z-index: 6;
+    animation: photonPulse 3s infinite alternate;
+}
+
+@keyframes photonPulse {
+    0% { box-shadow: 0 0 15px rgba(255, 180, 80, 0.4), 0 0 40px rgba(255, 140, 40, 0.2), inset 0 0 15px rgba(255, 200, 100, 0.3); }
+    100% { box-shadow: 0 0 30px rgba(255, 200, 100, 0.6), 0 0 70px rgba(255, 160, 60, 0.4), inset 0 0 25px rgba(255, 220, 140, 0.5); }
+}
+
+.event-horizon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, #000000 0%, #000008 80%, transparent 100%);
+    border-radius: 50%;
+    z-index: 7;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.9);
+}
+
+.gravitational-lens {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+        transparent 35%,
+        rgba(255, 255, 255, 0.015) 40%,
+        rgba(255, 255, 255, 0.03) 45%,
+        rgba(200, 200, 255, 0.02) 50%,
+        transparent 60%
+    );
+    z-index: 1;
+    animation: lensDistort 12s infinite alternate;
+}
+
+@keyframes lensDistort {
+    0% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+    50% { transform: translate(-50%, -50%) scale(1.05); opacity: 0.8; }
+    100% { transform: translate(-50%, -50%) scale(0.98); opacity: 0.6; }
+}
+
+@keyframes diskSpin {
+    from { transform: translate(-50%, -50%) rotateX(75deg) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotateX(75deg) rotate(360deg); }
+}
+
+/* Джеты */
+.jet {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    background: linear-gradient(to top, rgba(200, 150, 255, 0.6), rgba(100, 200, 255, 0.2), transparent);
+    filter: blur(2px);
+    z-index: 0;
+}
+
+.jet-top {
+    top: -80px;
+    height: 120px;
+    background: linear-gradient(to top, rgba(200, 150, 255, 0.7), rgba(100, 180, 255, 0.3), transparent);
+}
+
+.jet-bottom {
+    bottom: -80px;
+    height: 120px;
+    background: linear-gradient(to bottom, rgba(200, 150, 255, 0.7), rgba(100, 180, 255, 0.3), transparent);
+}
+
+/* ===== СОЛНЦЕ ===== */
+.sun-container {
+    position: fixed;
+    top: -80px;
+    right: -80px;
+    width: 400px;
+    height: 400px;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.sun-core {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle,
+        #fffde0 0%,
+        #fff9c0 10%,
+        #ffe880 25%,
+        #ffcc44 45%,
+        #ff9922 65%,
+        #ff6600 85%,
+        transparent 100%
+    );
+    border-radius: 50%;
+    box-shadow:
+        0 0 40px #ffdd44,
+        0 0 100px #ffaa22,
+        0 0 200px #ff7700,
+        0 0 350px #ff4400;
+}
+
+.sun-chromosphere {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 240px;
+    height: 240px;
+    background: radial-gradient(circle,
+        transparent 42%,
+        rgba(255, 100, 0, 0.3) 48%,
+        rgba(255, 60, 0, 0.15) 55%,
+        transparent 65%
+    );
+    border-radius: 50%;
+}
+
+.sun-corona {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle,
+        transparent 30%,
+        rgba(255, 200, 150, 0.08) 40%,
+        rgba(255, 150, 100, 0.04) 55%,
+        transparent 70%
+    );
+    border-radius: 50%;
+    animation: coronaBreath 6s infinite alternate;
+}
+
+@keyframes coronaBreath {
+    0% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+    100% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+}
+
+.sun-flare {
+    position: absolute;
+    background: linear-gradient(90deg, transparent, #ffcc44, #ff8800, transparent);
+    border-radius: 50%;
+    filter: blur(2px);
+    animation: flareFlicker 4s infinite alternate;
+}
+
+.flare-1 { top: 25%; left: 55%; width: 120px; height: 8px; animation-delay: 0s; }
+.flare-2 { top: 45%; left: 60%; width: 90px; height: 6px; animation-delay: 1.5s; }
+.flare-3 { top: 65%; left: 50%; width: 100px; height: 7px; animation-delay: 3s; }
+
+@keyframes flareFlicker {
+    0% { opacity: 0.2; transform: scaleX(0.6); }
+    100% { opacity: 0.8; transform: scaleX(1.3); }
+}
+
+/* ===== ПЛАНЕТЫ ===== */
+.planet {
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.mercury {
+    bottom: 20%;
+    left: 6%;
+    width: 12px;
+    height: 12px;
+    background: radial-gradient
