@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>codeboot// учись программировать</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="crt-overlay" aria-hidden="true"></div>
+
+<!-- ===================== HEADER ===================== -->
+<header class="topbar">
+  <div class="topbar__brand" id="brandHome">
+    <span class="brand__bracket">&lt;</span>codeboot<span class="brand__bracket">/&gt;</span>
+  </div>
+  <div class="topbar__status">
+    <span class="status__dot"></span>
+    <span id="topbarStatusText">выберите язык</span>
+  </div>
+</header>
+
+<!-- ===================== SCREEN: LANGUAGE SELECT ===================== -->
+<main id="screenSelect" class="screen screen--select">
+  <section class="hero">
+    <p class="hero__eyebrow">$ ./codeboot --init</p>
+    <h1 class="hero__title">Выбери язык.<br>Получи <span class="hero__accent">полный курс</span>.</h1>
+    <p class="hero__sub">Каждый язык — это отдельная консоль: теория, синтаксис, примеры и практика от первой строки кода до собственных программ. Прогресс сохраняется в браузере.</p>
+  </section>
+
+  <section class="langgrid" id="langGrid" aria-label="Выбор языка программирования">
+    <!-- заполняется через script.js -->
+  </section>
+</main>
+
+<!-- ===================== SCREEN: COURSE ===================== -->
+<main id="screenCourse" class="screen screen--course hidden">
+  <button class="backbtn" id="backBtn">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    все языки
+  </button>
+
+  <div class="course">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar__head">
+        <div class="sidebar__lang" id="sidebarLangName">—</div>
+        <div class="sidebar__progress">
+          <div class="sidebar__progressbar"><div class="sidebar__progressfill" id="progressFill"></div></div>
+          <span id="progressLabel">0 / 0</span>
+        </div>
+      </div>
+      <nav class="sidebar__list" id="lessonList"></nav>
+    </aside>
+
+    <article class="lesson" id="lessonView">
+      <!-- заполняется через script.js -->
+    </article>
+  </div>
+</main>
+
+<footer class="footer">
+  <p>codeboot — учебная платформа с открытым исходным кодом. Учись, экспериментируй, ломай и чини код.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
