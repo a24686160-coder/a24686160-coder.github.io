@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Kaspi Gold *6259</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            user-select: none;
+        }
+        body {
+            background: #f2f4f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 12px;
+        }
+        .card {
+            max-width: 400px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 32px 32px 0 0;
+            padding: 24px 20px 12px;
+            box-shadow: 0 8px 28px rgba(0,0,0,0.08);
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+        .header h1 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1a1a1a;
+            letter-spacing: 0.3px;
+        }
+        .header span {
+            color: #8e8e93;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .balance-block {
+            margin-top: 4px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #e9ecef;
+            padding-bottom: 16px;
+        }
+        .balance-label {
+            font-size: 13px;
+            color: #8e8e93;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+        .balance-value {
+            font-size: 40px;
+            font-weight: 700;
+            color: #1a1a1a;
+            cursor: pointer;
+            display: inline-block;
+            padding: 4px 8px 4px 0;
+            border-radius: 12px;
+            transition: background 0.15s;
+            letter-spacing: -0.5px;
+        }
+        .balance-value:hover {
+            background: #f0f0f3;
+        }
+        .balance-value:active {
+            background: #e5e5ea;
+        }
+        .balance-edit-hint {
+            font-size: 12px;
+            color: #8e8e93;
+            margin-top: 4px;
+            opacity: 0.7;
+        }
+        .actions-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            margin: 12px 0 16px;
+        }
+        .action-row {
+            display: flex;
+            align-items: center;
+            padding: 14px 6px;
+            border-bottom: 1px solid #f0f0f3;
+            cursor: default;
+        }
+        .action-row:last-child {
+            border-bottom: none;
+        }
+        .action-icon {
+            font-size: 22px;
+            width: 40px;
+            text-align: center;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+        .action-text {
+            flex: 1;
+            font-size: 16px;
+            font-weight: 450;
+            color: #1c1c1e;
+        }
+        .action-sub {
+            font-size: 13px;
+            color: #8e8e93;
+            font-weight: 400;
+            display: block;
+            margin-top: 2px;
+        }
+        .action-badge {
+            background: #007aff;
+            color: white;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 2px 10px;
+            border-radius: 30px;
+            margin-left: 6px;
+            letter-spacing: 0.3px;
+        }
+        .action-arrow {
+            color: #c6c6c8;
+            font-size: 18px;
+            margin-left: 8px;
+        }
+        .action-link {
+            color: #007aff;
+            font-size: 15px;
+            font-weight: 450;
+        }
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 12px 0 6px;
+            margin-top: 10px;
+            border-top: 1px solid #e9ecef;
+        }
+        .nav-item {
+            font-size: 12px;
+            color: #8e8e93;
+            text-align: center;
+            font-weight: 500;
+            letter-spacing: 0.2px;
+        }
+        .nav-item.active {
+            color: #007aff;
+        }
+        .nav-icon {
+            font-size: 24px;
+            display: block;
+            margin-bottom: 2px;
+        }
+        .divider {
+            height: 1px;
+            background: #e9ecef;
+            margin: 6px 0;
+        }
+        .edit-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(4px);
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+        .edit-box {
+            background: white;
+            padding: 28px 24px 24px;
+            border-radius: 28px;
+            width: 300px;
+            max-width: 90%;
+            box-shadow: 0 24px 48px rgba(0,0,0,0.25);
+            text-align: center;
+        }
+        .edit-box h3 {
+            font-size: 18px;
+            margin-bottom: 16px;
+            color: #1a1a1a;
+        }
+        .edit-box input {
+            width: 100%;
+            padding: 14px 16px;
+            font-size: 22px;
+            font-weight: 600;
+            border: 2px solid #e9ecef;
+            border-radius: 16px;
+            text-align: center;
+            outline: none;
+            color: #1a1a1a;
+        }
+        .edit-box input:focus {
+            border-color: #007aff;
+        }
+        .edit-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        .edit-actions button {
+            flex: 1;
+            padding: 14px 0;
+            border: none;
+            border-radius: 16px;
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .btn-cancel {
+            background: #f2f4f7;
+            color: #1a1a1a;
+        }
+        .btn-save {
+            background: #007aff;
+            color: white;
+        }
+        .btn-save:active {
+            background: #005bbf;
+        }
+        .footer-note {
+            font-size: 11px;
+            color: #b0b0b5;
+            text-align: center;
+            margin-top: 10px;
+            letter-spacing: 0.2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <!-- header -->
+        <div class="header">
+            <h1>Kaspi Gold <span style="font-weight:400;">*6259</span></h1>
+            <span style="font-size:14px;">•••</span>
+        </div>
+
+        <!-- balance -->
+        <div class="balance-block">
+            <div class="balance-label">Доступно</div>
+            <div id="balanceDisplay" class="balance-value">76 215,63 ₽</div>
+            <div class="balance-edit-hint">⏎ нажмите на сумму, чтобы изменить</div>
+        </div>
+
+        <!-- actions -->
+        <div style="font-size:13px; color:#8e8e93; font-weight:500; margin-bottom:6px;">Действия | Инфо | Выписка</div>
+        <div class="actions-grid">
+            <!-- Kaspi QR -->
+            <div class="action-row">
+                <span class="action-icon">📱</span>
+                <span class="action-text">Kaspi QR <span class="action-sub">Платите и получайте Бонусы</span></span>
+                <span style="color:#007aff;">🔗</span>
+            </div>
+            <!-- Переводы -->
+            <div class="action-row">
+                <span class="action-icon">↗️</span>
+                <span class="action-text">Переводы клиенту Kaspi</span>
+                <span style="color:#007aff;">🔗</span>
+            </div>
+            <!-- Google Pay -->
+            <div class="action-row">
+                <span class="action-icon">📲</span>
+                <span class="action-text">Добавить в Google Pay <span class="action-sub">только с 13 лет</span></span>
+                <span style="color:#007aff; margin-left:4px;">🔗</span>
+                <span class="action-badge">NEW</span>
+            </div>
+            <!-- Магазин -->
+            <div class="action-row">
+                <span class="action-icon">🛍️</span>
+                <span class="action-text">Магазин на Kaspi.kz <span class="action-sub">Выбирайте и делитесь товарами</span></span>
+                <span style="color:#007aff;">🔗</span>
+            </div>
+            <!-- Платежи -->
+            <div class="action-row">
+                <span class="action-icon">💳</span>
+                <span class="action-text">Платежи</span>
+                <span class="action-arrow">›</span>
+            </div>
+            <!-- Оплата в интернете -->
+            <div class="action-row">
+                <span class="action-icon">🌐</span>
+                <span class="action-text">Оплата в интернете</span>
+                <span class="action-arrow">›</span>
+            </div>
+            <!-- Заблокировать карту -->
+            <div class="action-row" style="border-bottom: none;">
+                <span class="action-icon">🔒</span>
+                <span class="action-text" style="color:#ff3b30;">Заблокировать карту</span>
+                <span class="action-arrow">›</span>
+            </div>
+        </div>
+
+        <!-- bottom nav -->
+        <div class="bottom-nav">
+            <div class="nav-item active"><span class="nav-icon">🏠</span>Главная</div>
+            <div class="nav-item"><span class="nav-icon">📷</span>Kaspi QR</div>
+            <div class="nav-item"><span class="nav-icon">💬</span>Сообщения</div>
+            <div class="nav-item"><span class="nav-icon">⚙️</span>Сервисы</div>
+        </div>
+        <div class="footer-note">Kaspi.kz • версия для демонстрации</div>
+    </div>
+
+    <!-- edit overlay -->
+    <div id="editOverlay" class="edit-overlay">
+        <div class="edit-box">
+            <h3>✏️ Редактировать баланс</h3>
+            <input type="text" id="balanceInput" placeholder="Например: 100000" value="76215.63">
+            <div class="edit-actions">
+                <button class="btn-cancel" id="cancelBtn">Отмена</button>
+                <button class="btn-save" id="saveBtn">Сохранить</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            const balanceDisplay = document.getElementById('balanceDisplay');
+            const overlay = document.getElementById('editOverlay');
+            const input = document.getElementById('balanceInput');
+            const cancelBtn = document.getElementById('cancelBtn');
+            const saveBtn = document.getElementById('saveBtn');
+
+            // текущий баланс (число)
+            let currentBalance = 76215.63;
+
+            function formatBalance(value) {
+                // разделитель тысяч пробел, десятичная запятая, 2 знака
+                const fixed = value.toFixed(2);
+                const parts = fixed.split('.');
+                const intPart = parts[0];
+                const decPart = parts[1];
+                // пробелы каждые 3 цифры
+                const withSpaces = intPart.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+                return withSpaces + ',' + decPart + ' ₽';
+            }
+
+            function updateDisplay() {
+                balanceDisplay.textContent = formatBalance(currentBalance);
+            }
+
+            // открыть редактор
+            function openEditor() {
+                // показываем текущее значение в виде числа с точкой
+                input.value = currentBalance.toFixed(2);
+                overlay.style.display = 'flex';
+                input.focus();
+                input.select();
+            }
+
+            // закрыть без сохранения
+            function closeEditor() {
+                overlay.style.display = 'none';
+            }
+
+            // сохранить
+            function saveBalance() {
+                let raw = input.value.trim().replace(/,/g, '.'); // замена запятой на точку
+                // убираем всё кроме цифр, точки и минуса (минус не нужен, но для безопасности)
+                raw = raw.replace(/[^0-9.]/g, '');
+                if (raw === '') {
+                    // если пусто — оставляем текущий
+                    closeEditor();
+                    return;
+                }
+                const num = parseFloat(raw);
+                if (isNaN(num) || num < 0) {
+                    // если не число или отрицательное — игнорируем
+                    closeEditor();
+                    return;
+                }
+                // округляем до 2 знаков
+                currentBalance = Math.round(num * 100) / 100;
+                updateDisplay();
+                closeEditor();
+            }
+
+            // событие клика на баланс
+            balanceDisplay.addEventListener('click', openEditor);
+
+            // кнопки
+            cancelBtn.addEventListener('click', closeEditor);
+            saveBtn.addEventListener('click', saveBalance);
+
+            // нажатие Enter в поле ввода
+            input.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    saveBalance();
+                }
+                if (e.key === 'Escape') {
+                    closeEditor();
+                }
+            });
+
+            // клик вне окна (на оверлей) — закрываем
+            overlay.addEventListener('click', function(e) {
+                if (e.target === overlay) {
+                    closeEditor();
+                }
+            });
+
+            // инициализация
+            updateDisplay();
+        })();
+    </script>
+</body>
+</html>
