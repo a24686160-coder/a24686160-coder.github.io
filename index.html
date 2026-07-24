@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Демо банковского интерфейса</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    color: #111;
+}
+
+.demo-warning {
+    background: #d93025;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.header {
+    background: #e4ad3e;
+    padding: 25px 35px 45px;
+}
+
+.card-name {
+    font-size: 28px;
+    font-weight: bold;
+    color: white;
+}
+
+.available {
+    margin-top: 45px;
+    color: white;
+    font-size: 20px;
+}
+
+.balance {
+    margin-top: 5px;
+    color: white;
+    font-size: 58px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.content {
+    background: white;
+    margin-top: -20px;
+    border-radius: 30px 30px 0 0;
+    padding: 25px 20px 100px;
+    min-height: 600px;
+}
+
+.tabs {
+    display: flex;
+    background: #f0f0f0;
+    border-radius: 25px;
+    padding: 4px;
+    margin-bottom: 25px;
+}
+
+.tab {
+    flex: 1;
+    text-align: center;
+    padding: 15px 5px;
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.tab.active {
+    background: white;
+    border-radius: 20px;
+}
+
+.action {
+    display: flex;
+    align-items: center;
+    padding: 18px 5px;
+    border-bottom: 1px solid #eee;
+    font-size: 20px;
+}
+
+.icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    font-size: 24px;
+}
+
+.arrow {
+    margin-left: auto;
+    color: #888;
+    font-size: 30px;
+}
+
+.editor {
+    margin: 25px 0;
+    padding: 20px;
+    background: #f7f7f7;
+    border-radius: 20px;
+}
+
+.editor h3 {
+    margin-top: 0;
+}
+
+input {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    font-size: 18px;
+}
+
+button {
+    width: 100%;
+    margin-top: 12px;
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
+    background: #e4ad3e;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.bottom {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 75px;
+    background: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-top: 1px solid #ddd;
+}
+
+.bottom-item {
+    text-align: center;
+    font-size: 13px;
+}
+
+.bottom-icon {
+    font-size: 25px;
+    margin-bottom: 4px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="demo-warning">
+    ДЕМО-МАКЕТ — НЕ НАСТОЯЩИЙ БАНКОВСКИЙ БАЛАНС
+</div>
+
+<div class="header">
+
+    <div class="card-name">
+        Демо-счёт •••• 6259
+    </div>
+
+    <div class="available">
+        Доступно
+    </div>
+
+    <div class="balance" id="balance">
+        76 215,63 ₸
+    </div>
+
+</div>
+
+<div class="content">
+
+    <div class="tabs">
+        <div class="tab active">Действия</div>
+        <div class="tab">Инфо</div>
+        <div class="tab">Выписка</div>
+    </div>
+
+    <div class="editor">
+
+        <h3>Изменить баланс (демо)</h3>
+
+        <input
+            id="balanceInput"
+            type="number"
+            value="76215.63"
+            step="0.01"
+        >
+
+        <button onclick="changeBalance()">
+            Изменить баланс
+        </button>
+
+    </div>
+
+    <div class="action">
+        <div class="icon">▣</div>
+        <div>QR-платёж</div>
+        <div class="arrow">›</div>
+    </div>
+
+    <div class="action">
+        <div class="icon">↔</div>
+        <div>Переводы</div>
+        <div class="arrow">›</div>
+    </div>
+
+    <div class="action">
+        <div class="icon">G</div>
+        <div>Добавить в Google Pay</div>
+        <div class="arrow">›</div>
+    </div>
+
+    <div class="action">
+        <div class="icon">🛒</div>
+        <div>Магазин</div>
+        <div class="arrow">›</div>
+    </div>
+
+    <div class="action">
+        <div class="icon">▣</div>
+        <div>Платежи</div>
+        <div class="arrow">›</div>
+    </div>
+
+</div>
+
+<div class="bottom">
+
+    <div class="bottom-item">
+        <div class="bottom-icon">⌂</div>
+        Главная
+    </div>
+
+    <div class="bottom-item">
+        <div class="bottom-icon">▣</div>
+        QR
+    </div>
+
+    <div class="bottom-item">
+        <div class="bottom-icon">💬</div>
+        Сообщения
+    </div>
+
+    <div class="bottom-item">
+        <div class="bottom-icon">☰</div>
+        Сервисы
+    </div>
+
+</div>
+
+<script>
+
+function changeBalance() {
+
+    let value = Number(
+        document.getElementById("balanceInput").value
+    );
+
+    if (isNaN(value)) {
+        alert("Введите сумму");
+        return;
+    }
+
+    let formatted = value.toLocaleString("ru-RU", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    });
+
+    document.getElementById("balance").textContent =
+        formatted + " ₸";
+}
+
+</script>
+
+</body>
+</html>
