@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Kaspi Gold *6259</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            user-select: none;
+        }
+        body {
+            background: #e5e5ea;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 12px;
+        }
+        .phone {
+            max-width: 390px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 40px 40px 0 0;
+            padding: 28px 20px 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+        /* статус бар (имитация) */
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a1a;
+            padding-bottom: 14px;
+            border-bottom: 1px solid #f0f0f3;
+        }
+        .status-bar span:last-child {
+            letter-spacing: 0.5px;
+        }
+        /* header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 16px;
+            margin-bottom: 8px;
+        }
+        .header h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #000;
+            letter-spacing: -0.3px;
+        }
+        .header h1 small {
+            font-weight: 400;
+            font-size: 18px;
+            color: #3a3a3c;
+        }
+        .header .menu-dots {
+            font-size: 22px;
+            color: #1a1a1a;
+            transform: rotate(90deg);
+            display: inline-block;
+            line-height: 1;
+        }
+        /* balance */
+        .balance-area {
+            margin-top: 6px;
+            margin-bottom: 22px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .balance-label {
+            font-size: 15px;
+            font-weight: 400;
+            color: #6c6c70;
+            letter-spacing: 0.3px;
+            margin-bottom: 2px;
+        }
+        .balance-value {
+            font-size: 44px;
+            font-weight: 700;
+            color: #000;
+            cursor: pointer;
+            display: inline-block;
+            padding: 2px 6px 2px 0;
+            border-radius: 10px;
+            transition: background 0.1s;
+            letter-spacing: -0.5px;
+        }
+        .balance-value:active {
+            background: #e5e5ea;
+        }
+        .edit-hint {
+            font-size: 12px;
+            color: #8e8e93;
+            margin-top: 2px;
+            opacity: 0.6;
+            font-weight: 400;
+        }
+        /* tabs: Действия | Инфо | Выписка */
+        .tabs {
+            display: flex;
+            gap: 18px;
+            font-size: 15px;
+            font-weight: 500;
+            color: #8e8e93;
+            margin-bottom: 10px;
+            padding: 0 2px;
+        }
+        .tabs span:first-child {
+            color: #007aff;
+        }
+        /* actions list */
+        .actions {
+            display: flex;
+            flex-direction: column;
+            margin-top: 4px;
+        }
+        .action-item {
+            display: flex;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 1px solid #f0f0f3;
+            gap: 14px;
+        }
+        .action-item:last-of-type {
+            border-bottom: none;
+        }
+        .action-icon {
+            font-size: 26px;
+            width: 42px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        .action-content {
+            flex: 1;
+        }
+        .action-title {
+            font-size: 17px;
+            font-weight: 450;
+            color: #1c1c1e;
+            line-height: 1.2;
+        }
+        .action-sub {
+            font-size: 14px;
+            font-weight: 400;
+            color: #8e8e93;
+            display: block;
+            margin-top: 2px;
+        }
+        .action-badge {
+            background: #007aff;
+            color: #fff;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 12px;
+            border-radius: 30px;
+            margin-left: 6px;
+            display: inline-block;
+            letter-spacing: 0.2px;
+        }
+        .action-link {
+            color: #007aff;
+            font-size: 18px;
+            font-weight: 300;
+            margin-left: 4px;
+        }
+        .action-chevron {
+            color: #c6c6c8;
+            font-size: 22px;
+            font-weight: 300;
+            margin-left: 4px;
+        }
+        .action-item.block .action-title {
+            color: #ff3b30;
+        }
+        /* bottom nav */
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            padding: 14px 0 6px;
+            margin-top: 14px;
+            border-top: 1px solid #e9ecef;
+        }
+        .nav-item {
+            font-size: 11px;
+            font-weight: 500;
+            color: #8e8e93;
+            text-align: center;
+            letter-spacing: 0.2px;
+        }
+        .nav-item.active {
+            color: #007aff;
+        }
+        .nav-icon {
+            font-size: 26px;
+            display: block;
+            margin-bottom: 2px;
+        }
+        /* overlay editor */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.35);
+            backdrop-filter: blur(6px);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .overlay-box {
+            background: #fff;
+            padding: 32px 24px 24px;
+            border-radius: 32px;
+            width: 320px;
+            max-width: 92%;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+        .overlay-box h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 18px;
+            color: #000;
+        }
+        .overlay-box input {
+            width: 100%;
+            padding: 16px;
+            font-size: 24px;
+            font-weight: 600;
+            border: 2px solid #e9ecef;
+            border-radius: 18px;
+            text-align: center;
+            outline: none;
+            color: #000;
+            background: #f8f9fc;
+        }
+        .overlay-box input:focus {
+            border-color: #007aff;
+            background: #fff;
+        }
+        .overlay-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 22px;
+        }
+        .overlay-actions button {
+            flex: 1;
+            padding: 16px 0;
+            border: none;
+            border-radius: 18px;
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.1s;
+        }
+        .btn-cancel {
+            background: #f2f4f7;
+            color: #1a1a1a;
+        }
+        .btn-save {
+            background: #007aff;
+            color: #fff;
+        }
+        .btn-save:active {
+            background: #0055b3;
+        }
+        .btn-cancel:active {
+            background: #e5e5ea;
+        }
+        .footer-text {
+            font-size: 11px;
+            color: #b0b0b5;
+            text-align: center;
+            margin-top: 14px;
+            letter-spacing: 0.2px;
+        }
+    </style>
+</head>
+<body>
+<div class="phone">
+    <!-- status -->
+    <div class="status-bar">
+        <span>9:41</span>
+        <span>🔋 100%</span>
+    </div>
+
+    <!-- header -->
+    <div class="header">
+        <h1>Kaspi Gold <small>*6259</small></h1>
+        <span class="menu-dots">⋯</span>
+    </div>
+
+    <!-- balance -->
+    <div class="balance-area">
+        <div class="balance-label">Доступно</div>
+        <div id="balanceDisplay" class="balance-value">76 215,63 ₽</div>
+        <div class="edit-hint">нажмите на сумму, чтобы изменить</div>
+    </div>
+
+    <!-- tabs -->
+    <div class="tabs">
+        <span>Действия</span>
+        <span>Инфо</span>
+        <span>Выписка</span>
+    </div>
+
+    <!-- actions -->
+    <div class="actions">
+        <!-- Kaspi QR -->
+        <div class="action-item">
+            <span class="action-icon">📱</span>
+            <div class="action-content">
+                <span class="action-title">Kaspi QR</span>
+                <span class="action-sub">Платите и получайте Бонусы</span>
+            </div>
+            <span class="action-link">🔗</span>
+        </div>
+        <!-- Переводы -->
+        <div class="action-item">
+            <span class="action-icon">↗️</span>
+            <div class="action-content">
+                <span class="action-title">Переводы клиенту Kaspi</span>
+            </div>
+            <span class="action-link">🔗</span>
+        </div>
+        <!-- Google Pay + NEW -->
+        <div class="action-item">
+            <span class="action-icon">📲</span>
+            <div class="action-content">
+                <span class="action-title">Добавить в Google Pay</span>
+                <span class="action-sub">только с 13 лет <span class="action-badge">NEW</span></span>
+            </div>
+            <span class="action-link">🔗</span>
+        </div>
+        <!-- Магазин -->
+        <div class="action-item">
+            <span class="action-icon">🛍️</span>
+            <div class="action-content">
+                <span class="action-title">Магазин на Kaspi.kz</span>
+                <span class="action-sub">Выбирайте и делитесь товарами</span>
+            </div>
+            <span class="action-link">🔗</span>
+        </div>
+        <!-- Платежи -->
+        <div class="action-item">
+            <span class="action-icon">💳</span>
+            <div class="action-content">
+                <span class="action-title">Платежи</span>
+            </div>
+            <span class="action-chevron">›</span>
+        </div>
+        <!-- Оплата в интернете -->
+        <div class="action-item">
+            <span class="action-icon">🌐</span>
+            <div class="action-content">
+                <span class="action-title">Оплата в интернете</span>
+            </div>
+            <span class="action-chevron">›</span>
+        </div>
+        <!-- Заблокировать карту -->
+        <div class="action-item block">
+            <span class="action-icon">🔒</span>
+            <div class="action-content">
+                <span class="action-title">Заблокировать карту</span>
+            </div>
+            <span class="action-chevron">›</span>
+        </div>
+    </div>
+
+    <!-- bottom nav -->
+    <div class="bottom-nav">
+        <div class="nav-item active"><span class="nav-icon">🏠</span>Главная</div>
+        <div class="nav-item"><span class="nav-icon">📷</span>Kaspi QR</div>
+        <div class="nav-item"><span class="nav-icon">💬</span>Сообщения</div>
+        <div class="nav-item"><span class="nav-icon">⚙️</span>Сервисы</div>
+    </div>
+    <div class="footer-text">Kaspi.kz • демо</div>
+</div>
+
+<!-- overlay -->
+<div id="editOverlay" class="overlay">
+    <div class="overlay-box">
+        <h3>✏️ Изменить баланс</h3>
+        <input type="text" id="balanceInput" value="76215.63">
+        <div class="overlay-actions">
+            <button class="btn-cancel" id="cancelBtn">Отмена</button>
+            <button class="btn-save" id="saveBtn">Сохранить</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function() {
+        const display = document.getElementById('balanceDisplay');
+        const overlay = document.getElementById('editOverlay');
+        const input = document.getElementById('balanceInput');
+        const cancel = document.getElementById('cancelBtn');
+        const save = document.getElementById('saveBtn');
+
+        let balance = 76215.63;
+
+        function format(n) {
+            return n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ' ').replace('.', ',') + ' ₽';
+        }
+
+        function render() {
+            display.textContent = format(balance);
+        }
+
+        function openEditor() {
+            input.value = balance.toFixed(2);
+            overlay.style.display = 'flex';
+            input.focus();
+            input.select();
+        }
+
+        function closeEditor() {
+            overlay.style.display = 'none';
+        }
+
+        function saveBalance() {
+            let raw = input.value.trim().replace(/,/g, '.');
+            raw = raw.replace(/[^0-9.]/g, '');
+            if (raw === '') { closeEditor(); return; }
+            const val = parseFloat(raw);
+            if (isNaN(val) || val < 0) { closeEditor(); return; }
+            balance = Math.round(val * 100) / 100;
+            render();
+            closeEditor();
+        }
+
+        display.addEventListener('click', openEditor);
+        cancel.addEventListener('click', closeEditor);
+        save.addEventListener('click', saveBalance);
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') saveBalance();
+            if (e.key === 'Escape') closeEditor();
+        });
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) closeEditor();
+        });
+
+        render();
+    })();
+</script>
+</body>
+</html>
